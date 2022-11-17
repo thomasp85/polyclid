@@ -33,5 +33,6 @@ URL: https://github.com/thomasp85/polyclid
 BugReports: https://github.com/thomasp85/polyclid/issues
 Remotes: 
     dickoa/cgalh
+    thomasp85/euclid
 Suggests: 
     covr
