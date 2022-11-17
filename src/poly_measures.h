@@ -4,15 +4,12 @@
 
 // length_impl -----------------------------------------------------------------
 template<typename IT>
-double path_length(IT start, IT end, bool close) {
+double path_length(IT start, IT end) {
   double len = 0;
   double last = 0;
   for (IT it = start; it != end; it++) {
     last = CGAL::sqrt(CGAL::to_double(it->squared_length().exact()));
     len += last;
-  }
-  if (!close) {
-    len -= last;
   }
   return len;
 }
@@ -23,13 +20,13 @@ inline double length_impl(const T& geo) {
 }
 template<>
 inline double length_impl<Polyline>(const Polyline& geo) {
-  return path_length(geo.edges_begin(), geo.edges_end(), false);
+  return path_length(geo.edges_begin(), geo.edges_end());
 }
 template<>
 inline double length_impl<Polygon>(const Polygon& geo) {
-  double len = path_length(geo.outer_boundary().edges_begin(), geo.outer_boundary().edges_end(), true);
+  double len = path_length(geo.outer_boundary().edges_begin(), geo.outer_boundary().edges_end());
   for (auto it = geo.holes_begin(); it != geo.holes_end(); it++) {
-    len += path_length(it->edges_begin(), it->edges_end(), true);
+    len += path_length(it->edges_begin(), it->edges_end());
   }
   return len;
 }
