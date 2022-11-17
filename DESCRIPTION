@@ -29,3 +29,5 @@ Imports:
     graphics,
     grid
 Roxygen: list(markdown = TRUE)
+URL: https://github.com/thomasp85/polyclid
+BugReports: https://github.com/thomasp85/polyclid/issues
