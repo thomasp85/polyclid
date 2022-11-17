@@ -31,3 +31,7 @@ Imports:
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/thomasp85/polyclid
 BugReports: https://github.com/thomasp85/polyclid/issues
+Remotes: 
+    dickoa/cgalh
+Suggests: 
+    covr

@@ -16,42 +16,38 @@ knitr::opts_chunk$set(
 # polyclid
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/thomasp85/polyclid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomasp85/polyclid/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/thomasp85/polyclid/branch/main/graph/badge.svg)](https://app.codecov.io/gh/thomasp85/polyclid?branch=main)
+
 <!-- badges: end -->
 
-The goal of polyclid is to ...
+**WORK IN PROGRESS**
+
+polyclid extents the computational geometry framework provided by [euclid](https://r-euclid.com) by providing base classes and algorithms for working with 2D polygons and polylines. The new classes provided by polyclid are:
+
+-   *polyline:* A line consisting of several segments joined consecutively at their end points
+
+-   *polygon:* A polygon optionally with holes but without any "islands" (e.g. no disjoint parts). The polygon can be unbounded, i.e. it extents infinitely on the plane
+
+-   *polyline_set:* A collection of polylines especially useful as intermediary representation for some workflows as it facilitates line sweeping
+
+-   *polygon_set:* Like above but for polygons. Boolean operations on polygons will create sets as the result may be disjoint areas
+
+As for algorithms, to the extent that it makes sense all methods provided by euclid has a counterpart in polyclid. Further, methods specific to polygons and polylines are provided such as 2D boolean set operations, polygon validation, etc.
 
 ## Installation
 
 You can install the development version of polyclid like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("thomasp85/polyclid")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(polyclid)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+TBD
 
 ## Code of Conduct
+
 Please note that the polyclid project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
