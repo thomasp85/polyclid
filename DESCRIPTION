@@ -1,0 +1,31 @@
+Package: polyclid
+Type: Package
+Title: Polygon Support for Euclid 
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Thomas Lin",
+             family = "Pedersen",
+             role = c("aut", "cre"),
+             email = "thomasp85@gmail.com", 
+             comment = c(ORCID = "0000-0002-5147-4711")))
+Description: Provides a polygon and polyline vector type for the 'euclid' 
+    ecosystem, along with several algorithms specific to these geometry types.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LinkingTo: 
+    cpp11 (>= 0.2.3),
+    euclid,
+    cgalh,
+    BH
+SystemRequirements: 
+    C++14,
+    gmp,
+    mpfr
+RoxygenNote: 7.2.1
+Depends: 
+    euclid
+Imports: 
+    cli,
+    graphics,
+    grid
+Roxygen: list(markdown = TRUE)
