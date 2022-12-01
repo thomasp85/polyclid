@@ -27,7 +27,9 @@
 enum Primitive {
   VIRTUAL,
   POLYGON,
-  POLYLINE
+  POLYLINE,
+  POLYGON_SET,
+  POLYLINE_SET
 };
 
 class poly_vector_base {
@@ -101,6 +103,10 @@ template<>
 poly_vector_base_p create_poly_vector(std::vector<Polyline>& input);
 template<>
 poly_vector_base_p create_poly_vector(std::vector<Polygon>& input);
+template<>
+poly_vector_base_p create_poly_vector(std::vector<Polygon_set>& input);
+template<>
+poly_vector_base_p create_poly_vector(std::vector<Polyline_set>& input);
 
 template<typename T>
 poly_vector_base_p create_scalar_poly(const T& val) {
@@ -115,6 +121,10 @@ template<>
 const std::vector<Polyline> get_vector_of_poly(const poly_vector_base& geometries);
 template<>
 const std::vector<Polygon> get_vector_of_poly(const poly_vector_base& geometries);
+template<>
+const std::vector<Polygon_set> get_vector_of_poly(const poly_vector_base& geometries);
+template<>
+const std::vector<Polyline_set> get_vector_of_poly(const poly_vector_base& geometries);
 
 // poly_vector -------------------------------------------------------------
 

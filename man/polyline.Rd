@@ -4,22 +4,27 @@
 \alias{polyline}
 \alias{is_polyline}
 \alias{as_polyline}
+\alias{is_selfintersecting}
 \title{Vector of polylines}
 \usage{
-polyline(points, id = NULL)
+polyline(..., id = NULL)
 
 is_polyline(x)
 
 as_polyline(x, ...)
+
+is_selfintersecting(x)
 }
 \arguments{
-\item{points}{A vector of points, or a list. See the \emph{Constructors} sections}
+\item{...}{Various input for construction. See the \emph{Constructors} sections}
 
 \item{id}{An integer vector of the same length as \code{points}, dividing the
 points into separate polylines (only used if \code{points} is a point vector)}
+
+\item{x}{A \code{polyclid_polyline} vector}
 }
 \value{
-An \code{polyclid_polyline} vector
+A \code{polyclid_polyline} vector
 }
 \description{
 A polyline is a set of points defining the trajectory of a path.
@@ -27,26 +32,23 @@ A polyline is a set of points defining the trajectory of a path.
 \section{Constructors}{
 
 \itemize{
-\item Providing a points vector and no \code{id} will construct a single polyline with
-no holes
-\item Providing a points vector and an \code{id} vector will create a vector of
+\item Providing a 2D points vector and no \code{id} will construct a single polyline
+\item Providing a 2D points vector and an \code{id} vector will create a vector of
 polylines
-\item Providing a list of point vectors will construct a vector of polylines
+\item Instead of a 2D point vector above you can provide x and y coordinates for
+the points directly.
+\item Providing a list of 2D point vectors will construct a vector of polylines
 }
 }
 
 \examples{
 sine <- polyline(
-  euclid::point(
-    seq(0, 2*pi, length.out = 20),
-    sin(seq(0, 2*pi, length.out = 20))
-  )
+  seq(0, 2*pi, length.out = 20),
+  sin(seq(0, 2*pi, length.out = 20))
 )
 loop <- polyline(
-  euclid::point(
-    c(0, 5, 6, 5, 0),
-    c(-1, 1, 0, -1, 1)
-  )
+  c(0, 5, 6, 5, 0),
+  c(-1, 1, 0, -1, 1)
 )
 polylines <- c(sine, loop)
 plot(polylines, lty = c(1, 2))
@@ -58,3 +60,8 @@ is_selfintersecting(polylines)
 reverse_orientation(polylines)
 
 }
+\seealso{
+Other polylines: 
+\code{\link{polyline_set}()}
+}
+\concept{polylines}

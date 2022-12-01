@@ -4,9 +4,17 @@
 \name{polyclid-package}
 \alias{polyclid}
 \alias{polyclid-package}
-\title{polyclid: Polygon Support for Euclid}
+\title{polyclid: Polygon and Polyline Support for Euclid}
 \description{
 Provides a polygon and polyline vector type for the 'euclid' ecosystem, along with several algorithms specific to these geometry types.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/thomasp85/polyclid}
+  \item Report bugs at \url{https://github.com/thomasp85/polyclid/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Thomas Lin Pedersen \email{thomasp85@gmail.com} (\href{https://orcid.org/0000-0002-5147-4711}{ORCID})

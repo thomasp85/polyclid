@@ -216,6 +216,10 @@ polygon_n_holes <- function(geometries) {
   .Call(`_polyclid_polygon_n_holes`, geometries)
 }
 
+polygon_has_boundary <- function(geometries) {
+  .Call(`_polyclid_polygon_has_boundary`, geometries)
+}
+
 polygon_get_boundary <- function(geometries) {
   .Call(`_polyclid_polygon_get_boundary`, geometries)
 }
@@ -240,6 +244,74 @@ polygon_set_hole <- function(geometries, which, other) {
   .Call(`_polyclid_polygon_set_hole`, geometries, which, other)
 }
 
+create_polygonset_empty <- function() {
+  .Call(`_polyclid_create_polygonset_empty`)
+}
+
+create_polygonset_polygon <- function(p) {
+  .Call(`_polyclid_create_polygonset_polygon`, p)
+}
+
+create_polygonset_list <- function(p) {
+  .Call(`_polyclid_create_polygonset_list`, p)
+}
+
+polygonset_n_polygons <- function(geometries) {
+  .Call(`_polyclid_polygonset_n_polygons`, geometries)
+}
+
+polygonset_get_polygon <- function(geometries, which) {
+  .Call(`_polyclid_polygonset_get_polygon`, geometries, which)
+}
+
+polygonset_get_all_polygon <- function(geometries) {
+  .Call(`_polyclid_polygonset_get_all_polygon`, geometries)
+}
+
+polygonset_complement <- function(geometries) {
+  .Call(`_polyclid_polygonset_complement`, geometries)
+}
+
+polygonset_union <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_union`, geometries, other)
+}
+
+polygonset_intersection <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_intersection`, geometries, other)
+}
+
+polygonset_difference <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_difference`, geometries, other)
+}
+
+polygonset_symmetric_difference <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_symmetric_difference`, geometries, other)
+}
+
+polygonset_cum_union <- function(geometries) {
+  .Call(`_polyclid_polygonset_cum_union`, geometries)
+}
+
+polygonset_cum_intersection <- function(geometries) {
+  .Call(`_polyclid_polygonset_cum_intersection`, geometries)
+}
+
+polygonset_cum_difference <- function(geometries) {
+  .Call(`_polyclid_polygonset_cum_difference`, geometries)
+}
+
+polygonset_cum_symmetric_difference <- function(geometries) {
+  .Call(`_polyclid_polygonset_cum_symmetric_difference`, geometries)
+}
+
+polygonset_do_intersect <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_do_intersect`, geometries, other)
+}
+
+polygonset_locate <- function(geometries, points) {
+  .Call(`_polyclid_polygonset_locate`, geometries, points)
+}
+
 create_polyline_empty <- function() {
   .Call(`_polyclid_create_polyline_empty`)
 }
@@ -254,4 +326,116 @@ create_polyline_list <- function(ps) {
 
 create_polyline_segment <- function(segments) {
   .Call(`_polyclid_create_polyline_segment`, segments)
+}
+
+create_polylineset_empty <- function() {
+  .Call(`_polyclid_create_polylineset_empty`)
+}
+
+create_polylineset_polyline <- function(p) {
+  .Call(`_polyclid_create_polylineset_polyline`, p)
+}
+
+create_polylineset_list <- function(p) {
+  .Call(`_polyclid_create_polylineset_list`, p)
+}
+
+polylineset_n_polylines <- function(geometries) {
+  .Call(`_polyclid_polylineset_n_polylines`, geometries)
+}
+
+polylineset_n_polylines_simplified <- function(geometries) {
+  .Call(`_polyclid_polylineset_n_polylines_simplified`, geometries)
+}
+
+polylineset_get_polylines <- function(geometries, which) {
+  .Call(`_polyclid_polylineset_get_polylines`, geometries, which)
+}
+
+polylineset_get_all_polylines <- function(geometries) {
+  .Call(`_polyclid_polylineset_get_all_polylines`, geometries)
+}
+
+polylineset_get_polylines_simplified <- function(geometries, which) {
+  .Call(`_polyclid_polylineset_get_polylines_simplified`, geometries, which)
+}
+
+polylineset_get_all_polylines_simplified <- function(geometries) {
+  .Call(`_polyclid_polylineset_get_all_polylines_simplified`, geometries)
+}
+
+polylineset_vert_degree <- function(geometries) {
+  .Call(`_polyclid_polylineset_vert_degree`, geometries)
+}
+
+polylineset_vert_neighbors <- function(geometries) {
+  .Call(`_polyclid_polylineset_vert_neighbors`, geometries)
+}
+
+polylineset_polyline_verts <- function(geometries) {
+  .Call(`_polyclid_polylineset_polyline_verts`, geometries)
+}
+
+polylineset_n_faces <- function(geometries) {
+  .Call(`_polyclid_polylineset_n_faces`, geometries)
+}
+
+polylineset_get_faces <- function(geometries) {
+  .Call(`_polyclid_polylineset_get_faces`, geometries)
+}
+
+polylineset_union <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_union`, geometries, other)
+}
+
+polylineset_intersection <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_intersection`, geometries, other)
+}
+
+polylineset_difference <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_difference`, geometries, other)
+}
+
+polylineset_symmetric_difference <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_symmetric_difference`, geometries, other)
+}
+
+polylineset_cum_union <- function(geometries) {
+  .Call(`_polyclid_polylineset_cum_union`, geometries)
+}
+
+polylineset_cum_intersection <- function(geometries) {
+  .Call(`_polyclid_polylineset_cum_intersection`, geometries)
+}
+
+polylineset_cum_difference <- function(geometries) {
+  .Call(`_polyclid_polylineset_cum_difference`, geometries)
+}
+
+polylineset_cum_symmetric_difference <- function(geometries) {
+  .Call(`_polyclid_polylineset_cum_symmetric_difference`, geometries)
+}
+
+polylineset_do_intersect <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_do_intersect`, geometries, other)
+}
+
+polylineset_polygonset_union <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_polygonset_union`, geometries, other)
+}
+
+polylineset_polygonset_intersection <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_polygonset_intersection`, geometries, other)
+}
+
+polylineset_polygonset_difference <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_polygonset_difference`, geometries, other)
+}
+
+polygonset_polylineset_difference <- function(geometries, other) {
+  .Call(`_polyclid_polygonset_polylineset_difference`, geometries, other)
+}
+
+polylineset_polygonset_symmetric_difference <- function(geometries, other) {
+  .Call(`_polyclid_polylineset_polygonset_symmetric_difference`, geometries, other)
 }

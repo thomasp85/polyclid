@@ -35,10 +35,8 @@ of a hole, first extract it with \code{\link[=hole]{hole()}}.
 }
 \examples{
 poly <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0),
-    c(10, 10, 0, 0)
-  )
+  c(0, 10, 10, 0),
+  c(10, 10, 0, 0)
 )
 
 is_clockwise(poly)

@@ -14,19 +14,15 @@
 #'
 #' @examples
 #' sine <- polyline(
-#'   euclid::point(
-#'     seq(0, 2*pi, length.out = 20),
-#'     sin(seq(0, 2*pi, length.out = 20))
-#'   )
+#'   seq(0, 2*pi, length.out = 20),
+#'   sin(seq(0, 2*pi, length.out = 20))
 #' )
 #' is_monotone(sine, "x")
 #' is_monotone(sine, "y")
 #'
 #' poly <- polyline(
-#'   euclid::point(
-#'     c(0, 1, 1, 2),
-#'     c(0, 1, 2, 3)
-#'   )
+#'   c(0, 1, 1, 2),
+#'   c(0, 1, 2, 3)
 #' )
 #'
 #' is_monotone(sine, "x")

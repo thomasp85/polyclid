@@ -23,10 +23,8 @@
 #'
 #' @examples
 #' poly <- polygon(
-#'   euclid::point(
-#'     c(0, 10, 10, 0, 1, 5, 1),
-#'     c(0, 0, 10, 10, 1, 1, 5)
-#'   ),
+#'   c(0, 10, 10, 0, 1, 5, 1),
+#'   c(0, 0, 10, 10, 1, 1, 5),
 #'   hole_id = c(1, 1, 1, 1, 2, 2, 2)
 #' )
 #' plot(poly, col = "grey")
@@ -68,6 +66,14 @@ n_holes <- function(x) {
 }
 #' @rdname polygon_rings
 #' @export
+is_bounded <- function(x) {
+  if (!is_polygon(x)) {
+    abort("`x` must be a polygon")
+  }
+  polygon_has_boundary(get_ptr(x))
+}
+#' @rdname polygon_rings
+#' @export
 boundary <- function(x) {
   if (!is_polygon(x)) {
     abort("`x` must be a polygon geometry")
@@ -85,49 +91,49 @@ boundary <- function(x) {
 }
 #' @rdname polygon_rings
 #' @export
-hole <- function(x, index) {
+hole <- function(x, which) {
   if (!is_polygon(x)) {
     abort("`x` must be a polygon")
   }
-  index <- rep_len(as.integer(index) - 1L, length(x))
-  if (any(index > n_holes(x))) {
-    cli_abort("{.arg index} must not be larger than the number of holes")
+  which <- rep_len(as.integer(which) - 1L, length(x))
+  if (any(which > n_holes(x))) {
+    cli_abort("{.arg which} must not be larger than the number of holes")
   }
-  if (any(index < 0)) {
-    cli_abort("{.arg index} must be positive")
+  if (any(which < 0)) {
+    cli_abort("{.arg which} must be positive")
   }
-  new_poly_vector(polygon_get_hole(get_ptr(x), index))
+  new_poly_vector(polygon_get_hole(get_ptr(x), which))
 }
 #' @rdname polygon_rings
 #' @export
-`hole<-` <- function(x, index = NULL, value) {
+`hole<-` <- function(x, which = NULL, value) {
   if (!is_polygon(x)) {
     abort("`x` must be a polygon")
   }
-  if (!is.null(index)) {
-    index <- rep_len(as.integer(index) - 1L, length(x))
-    if (any(index > n_holes(x))) {
-      cli_abort("{.arg index} must not be larger than the number of holes")
+  if (!is.null(which)) {
+    which <- rep_len(as.integer(which) - 1L, length(x))
+    if (any(which > n_holes(x))) {
+      cli_abort("{.arg which} must not be larger than the number of holes")
     }
-    if (any(index < 0)) {
-      cli_abort("{.arg index} must be positive")
+    if (any(which < 0)) {
+      cli_abort("{.arg which} must be positive")
     }
   }
   if (is.null(value)) {
-    if (is.null(index)) {
+    if (is.null(which)) {
       boundary(x)
     } else {
-      new_poly_vector(polygon_remove_hole(get_ptr(x), index))
+      new_poly_vector(polygon_remove_hole(get_ptr(x), which))
     }
   } else {
     value <- as_polygon(value)
     if (any(n_holes(value) != 0)) {
       warn("only the boundary of `value` is used when assigning as a hole")
     }
-    if (is.null(index)) {
+    if (is.null(which)) {
       new_poly_vector(polygon_add_hole(get_ptr(x), get_ptr(value)))
     } else {
-      new_poly_vector(polygon_set_hole(get_ptr(x), index, get_ptr(value)))
+      new_poly_vector(polygon_set_hole(get_ptr(x), which, get_ptr(value)))
     }
   }
 }

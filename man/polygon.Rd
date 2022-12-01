@@ -6,25 +6,24 @@
 \alias{as_polygon}
 \title{Vector of polygons}
 \usage{
-polygon(points, id = NULL, hole_id = NULL)
+polygon(..., id = NULL, hole_id = NULL)
 
 is_polygon(x)
 
 as_polygon(x, ...)
 }
 \arguments{
-\item{points}{A vector of points, or a list. See the \emph{Constructors} sections}
+\item{...}{Vector of points, numerics, or a list. See the \emph{Constructors}
+sections}
 
 \item{id}{An integer vector of the same length as \code{points}, dividing the
 points into separate polygons (only used if \code{points} is a point vector)}
 
-\item{x}{An object convertible to a polygon vector or a polygon vector}
-
-\item{...}{arguments passed on to methods}
-
-\item{holes_id}{An integer vector of the same length as \code{points}, dividing
+\item{hole_id}{An integer vector of the same length as \code{points}, dividing
 the points into boundary and separate holes (only used if \code{points} is a point
 vector).}
+
+\item{x}{An object convertible to a polygon vector or a polygon vector}
 }
 \value{
 An \code{polyclid_polygon} vector
@@ -37,17 +36,19 @@ boundary.
 \section{Constructors}{
 
 \itemize{
-\item Providing a points vector and no \code{id} and \code{holes_id} will construct a
+\item Providing a 2D points vector and no \code{id} and \code{holes_id} will construct a
 single polygon with no holes
-\item Providing a points vector and an \code{id} vector will create a vector of
+\item Providing a 2D points vector and an \code{id} vector will create a vector of
 polygons with no holes
-\item Providing a points vector and a \code{holes_id} vector will construct a single
+\item Providing a 2D points vector and a \code{holes_id} vector will construct a single
 polygon with holes
-\item Providing a points vector, an \code{id} vector, and a \code{holes_id} vector will
+\item Providing a 2D points vector, an \code{id} vector, and a \code{holes_id} vector will
 construct a vector of polygons with holes
-\item Providing a list of point vectors will construct a vector of polygons with
-no holes
-\item Providing a list of list of point vectors will construct a vector of
+\item For all above, instead of a 2D point vector the x and y coordinates can be
+supplied directly
+\item Providing a list of 2D point vectors will construct a vector of polygons
+with no holes
+\item Providing a list of list of 2D point vectors will construct a vector of
 polygons with holes
 }
 
@@ -66,6 +67,12 @@ poly <- polygon(points)
 poly
 
 plot(poly, col = "grey")
+
+# Or directly from x and y coordinates
+poly <- polygon(
+  c(1, 0, -1, -0.5, 0.5),
+  c(0, 1, 0, -1, -1)
+)
 
 # Use id to split points into multiple polygons
 poly <- polygon(points[c(1, 2, 3, 4, 5, 1)], id = rep(1:2, each = 3))
@@ -102,3 +109,8 @@ unique(polys)
 duplicated(polys)
 
 }
+\seealso{
+Other polygons: 
+\code{\link{polygon_set}()}
+}
+\concept{polygons}

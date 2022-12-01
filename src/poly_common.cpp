@@ -16,6 +16,8 @@ cpp11::writable::strings poly_primitive_type(poly_vector_base_p geometries) {
   switch (geometries->poly_type()) {
   case POLYLINE: return {"polyline"};
   case POLYGON: return {"polygon"};
+  case POLYLINE_SET: return {"polyline_set"};
+  case POLYGON_SET: return {"polygon_set"};
   case VIRTUAL: return {"virtual"};
   }
   return {"unknown"};

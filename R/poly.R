@@ -252,7 +252,7 @@ def.polyclid_geometry <- function(x, name, which = NULL, ...) {
 }
 #' @importFrom euclid definition_names
 #' @export
-definition_names.polyclid_geometry <- function(x) {
+definition_names.polyclid_geometry <- function(x, ...) {
   poly_definition_names(get_ptr(x))
 }
 #' @importFrom euclid vert

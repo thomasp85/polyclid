@@ -1,8 +1,8 @@
 #' @importFrom graphics plot plot.new plot.window Axis title box
 #' @export
 plot.polyclid_geometry <- function(x, y, xlim = NULL, ylim = NULL, add = FALSE, axes = TRUE, frame.plot = axes, ...) {
-  dev.hold()
-  on.exit(dev.flush())
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush())
   if (!add) {
     if (is.null(xlim) || is.null(ylim)) {
       cbox <- as_bbox(x)
@@ -30,12 +30,14 @@ plot.polyclid_geometry <- function(x, y, xlim = NULL, ylim = NULL, add = FALSE, 
 #' @importFrom euclid euclid_plot
 #' @export
 euclid_plot.polyclid_polygon <- function(x, ..., force_valid = TRUE, mapping_plane = "z") {
-  pars <- lapply(list(...), function(p) rep_len(p, length(x)))
+  pars <- lapply(list2(...), function(p) rep_len(p, length(x)))
   pars$y <- NULL
   if (!is.null(pars$rule) && any(pars$rule != "winding")) {
     cli_warn("ignoring {.arg rule} as polyclid polygons are defined by winding")
     pars$rule <- NULL
   }
+  plot_lim <- graphics::par("usr")
+  plot_lim <- matrix(plot_lim[c(1,2,2,1,3,3,4,4)], ncol = 2)
   for (i in seq_along(x)) {
     if (is.na(x[i])) next
     poly <- x[i]
@@ -49,6 +51,10 @@ euclid_plot.polyclid_polygon <- function(x, ..., force_valid = TRUE, mapping_pla
     p <- lapply(pars, `[`, i)
     coords <- as.matrix(poly)
     holes <- cardinality(poly, split = TRUE)
+    if (!is_bounded(poly)) {
+      coords <- rbind(plot_lim, coords)
+      holes <- c(4, holes)
+    }
     holes <- rep(seq_along(holes), holes)
     index <- unlist(lapply(split(seq_len(nrow(coords)), holes), function(i) c(NA_integer_, i)))[-1]
     coords <- coords[index, ]
@@ -60,7 +66,7 @@ euclid_plot.polyclid_polygon <- function(x, ..., force_valid = TRUE, mapping_pla
 #' @importFrom euclid euclid_plot
 #' @export
 euclid_plot.polyclid_polyline <- function(x, ..., mapping_plane = "z") {
-  pars <- lapply(list(...), function(p) rep_len(p, length(x)))
+  pars <- lapply(list2(...), function(p) rep_len(p, length(x)))
   pars$y <- NULL
   if (!is.null(pars$type) && any(pars$type != "l")) {
     cli_warn("ignoring {.arg type} as polyclid polylines are drawn as lines")
@@ -74,13 +80,31 @@ euclid_plot.polyclid_polyline <- function(x, ..., mapping_plane = "z") {
   invisible(NULL)
 }
 
+#' @importFrom euclid euclid_plot
+#' @export
+euclid_plot.polyclid_polygon_set <- function(x, ..., mapping_plane = "z") {
+  n <- n_polygons(x)
+  pars <- lapply(list2(...), function(p) rep(rep_len(p, length(x)), n))
+  polygons <- as_polygon(x)
+  euclid_plot(polygons, !!!pars)
+}
+
+#' @importFrom euclid euclid_plot
+#' @export
+euclid_plot.polyclid_polyline_set <- function(x, ..., mapping_plane = "z") {
+  n <- n_polylines(x)
+  pars <- lapply(list2(...), function(p) rep(rep_len(p, length(x)), n))
+  polylines <- as_polyline(x)
+  euclid_plot(polylines, !!!pars)
+}
+
 #' @importFrom euclid euclid_grob
 #' @importFrom grid pathGrob gpar
 #' @export
 euclid_grob.polyclid_polygon <- function(x, force_valid = TRUE, ..., unit = "native", name = NULL, gp = gpar(), vp = NULL, mapping_plane = "z") {
   x <- x[!is.na(x)]
   if (force_valid) {
-    x <- try(make_valid(x[i]))
+    x <- make_valid(x)
     if (anyNA(x)) {
       cli_warn("Ignoring invalid polygon")
       x <- x[!is.na(x)]
@@ -107,7 +131,7 @@ euclid_grob.polyclid_polygon <- function(x, force_valid = TRUE, ..., unit = "nat
 #' @importFrom euclid euclid_grob
 #' @importFrom grid polylineGrob gpar
 #' @export
-euclid_grob.polyline_polygon <- function(x, ..., unit = "native", name = NULL, gp = gpar(), vp = NULL, mapping_plane = "z") {
+euclid_grob.polyclid_polyline <- function(x, ..., unit = "native", name = NULL, gp = gpar(), vp = NULL, mapping_plane = "z") {
   coords <- as.matrix(x)
   line <- cardinality(x)
   line <- rep(seq_along(line), line)
@@ -120,4 +144,28 @@ euclid_grob.polyline_polygon <- function(x, ..., unit = "native", name = NULL, g
     gp = gp,
     vp = vp
   )
+}
+
+#' @export
+euclid_grob.polyclid_polygon_set <- function(x, ..., unit = "native", name = NULL, gp = gpar(), vp = NULL, mapping_plane = "z") {
+  n <- n_polygons(x)
+  for (par in names(gp)) {
+    if (length(gp[[par]]) > 1) {
+      gp[[par]] <- rep(rep_len(gp, length(x)), n)
+    }
+  }
+  p <- as_polygon(x)
+  euclid_grob(p, ..., unit = unit, name = name, gp = gp, vp = vp)
+}
+
+#' @export
+euclid_grob.polyclid_polyline_set <- function(x, ..., unit = "native", name = NULL, gp = gpar(), vp = NULL, mapping_plane = "z") {
+  n <- n_polylines(x)
+  for (par in names(gp)) {
+    if (length(gp[[par]]) > 1) {
+      gp[[par]] <- rep(rep_len(gp, length(x)), n)
+    }
+  }
+  p <- as_polyline(x)
+  euclid_grob(p, ..., unit = unit, name = name, gp = gp, vp = vp)
 }

@@ -7,8 +7,8 @@
 #include <CGAL/Boolean_set_operations_2.h>
 #include <CGAL/connect_holes.h>
 
-inline Polygon polygon_make_valid_impl(const Polygon& pol) {
-  if (pol.get_flag(VALIDITY_CHECKED) && pol.get_flag(IS_VALID)) {
+inline Polygon polygon_make_valid_impl(Polygon& pol) {
+  if (polygon_is_valid_impl(pol) || pol.is_na()) {
     return pol;
   }
   Polygon_set S;

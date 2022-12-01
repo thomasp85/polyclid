@@ -384,6 +384,13 @@ extern "C" SEXP _polyclid_polygon_n_holes(SEXP geometries) {
   END_CPP11
 }
 // polygon.cpp
+cpp11::writable::logicals polygon_has_boundary(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_has_boundary(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_has_boundary(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
 polygon_p polygon_get_boundary(polygon_p geometries);
 extern "C" SEXP _polyclid_polygon_get_boundary(SEXP geometries) {
   BEGIN_CPP11
@@ -425,6 +432,125 @@ extern "C" SEXP _polyclid_polygon_set_hole(SEXP geometries, SEXP which, SEXP oth
     return cpp11::as_sexp(polygon_set_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
   END_CPP11
 }
+// polygon_set.cpp
+polygon_set_p create_polygonset_empty();
+extern "C" SEXP _polyclid_create_polygonset_empty() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygonset_empty());
+  END_CPP11
+}
+// polygon_set.cpp
+polygon_set_p create_polygonset_polygon(polygon_p p);
+extern "C" SEXP _polyclid_create_polygonset_polygon(SEXP p) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygonset_polygon(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(p)));
+  END_CPP11
+}
+// polygon_set.cpp
+polygon_set_p create_polygonset_list(cpp11::list_of<polygon_p> p);
+extern "C" SEXP _polyclid_create_polygonset_list(SEXP p) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygonset_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list_of<polygon_p>>>(p)));
+  END_CPP11
+}
+// polygon_set.cpp
+cpp11::writable::integers polygonset_n_polygons(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_n_polygons(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_n_polygons(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_get_polygon(polygon_set_p geometries, cpp11::integers which);
+extern "C" SEXP _polyclid_polygonset_get_polygon(SEXP geometries, SEXP which) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_get_polygon(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_get_all_polygon(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_get_all_polygon(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_get_all_polygon(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_complement(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_complement(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_complement(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_union(polygon_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_union(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_union(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_intersection(polygon_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_intersection(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_intersection(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_difference(polygon_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_difference(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_symmetric_difference(polygon_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_symmetric_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_cum_union(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_cum_union(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_cum_union(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_cum_intersection(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_cum_intersection(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_cum_intersection(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_cum_difference(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_cum_difference(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_cum_difference(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_cum_symmetric_difference(polygon_set_p geometries);
+extern "C" SEXP _polyclid_polygonset_cum_symmetric_difference(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_cum_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries)));
+  END_CPP11
+}
+// polygon_set.cpp
+cpp11::writable::logicals polygonset_do_intersect(polygon_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_do_intersect(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_do_intersect(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polygon_set.cpp
+poly_vector_base_p polygonset_locate(polygon_set_p geometries, SEXP points);
+extern "C" SEXP _polyclid_polygonset_locate(SEXP geometries, SEXP points) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_locate(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<SEXP>>(points)));
+  END_CPP11
+}
 // polyline.cpp
 polyline_p create_polyline_empty();
 extern "C" SEXP _polyclid_create_polyline_empty() {
@@ -453,73 +579,315 @@ extern "C" SEXP _polyclid_create_polyline_segment(SEXP segments) {
     return cpp11::as_sexp(create_polyline_segment(cpp11::as_cpp<cpp11::decay_t<SEXP>>(segments)));
   END_CPP11
 }
+// polyline_set.cpp
+polyline_set_p create_polylineset_empty();
+extern "C" SEXP _polyclid_create_polylineset_empty() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polylineset_empty());
+  END_CPP11
+}
+// polyline_set.cpp
+polyline_set_p create_polylineset_polyline(polyline_p p);
+extern "C" SEXP _polyclid_create_polylineset_polyline(SEXP p) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polylineset_polyline(cpp11::as_cpp<cpp11::decay_t<polyline_p>>(p)));
+  END_CPP11
+}
+// polyline_set.cpp
+polyline_set_p create_polylineset_list(cpp11::list_of<polyline_p> p);
+extern "C" SEXP _polyclid_create_polylineset_list(SEXP p) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polylineset_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list_of<polyline_p>>>(p)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::integers polylineset_n_polylines(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_n_polylines(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_n_polylines(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::integers polylineset_n_polylines_simplified(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_n_polylines_simplified(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_n_polylines_simplified(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_get_polylines(polyline_set_p geometries, cpp11::integers which);
+extern "C" SEXP _polyclid_polylineset_get_polylines(SEXP geometries, SEXP which) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_get_polylines(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_get_all_polylines(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_get_all_polylines(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_get_all_polylines(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_get_polylines_simplified(polyline_set_p geometries, cpp11::integers which);
+extern "C" SEXP _polyclid_polylineset_get_polylines_simplified(SEXP geometries, SEXP which) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_get_polylines_simplified(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_get_all_polylines_simplified(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_get_all_polylines_simplified(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_get_all_polylines_simplified(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::integers polylineset_vert_degree(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_vert_degree(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_vert_degree(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::list polylineset_vert_neighbors(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_vert_neighbors(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_vert_neighbors(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::list polylineset_polyline_verts(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_polyline_verts(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_polyline_verts(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::integers polylineset_n_faces(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_n_faces(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_n_faces(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_get_faces(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_get_faces(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_get_faces(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_union(polyline_set_p geometries, polyline_set_p other);
+extern "C" SEXP _polyclid_polylineset_union(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_union(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_intersection(polyline_set_p geometries, polyline_set_p other);
+extern "C" SEXP _polyclid_polylineset_intersection(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_intersection(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_difference(polyline_set_p geometries, polyline_set_p other);
+extern "C" SEXP _polyclid_polylineset_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_symmetric_difference(polyline_set_p geometries, polyline_set_p other);
+extern "C" SEXP _polyclid_polylineset_symmetric_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_cum_union(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_cum_union(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_cum_union(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_cum_intersection(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_cum_intersection(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_cum_intersection(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_cum_difference(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_cum_difference(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_cum_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_cum_symmetric_difference(polyline_set_p geometries);
+extern "C" SEXP _polyclid_polylineset_cum_symmetric_difference(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_cum_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries)));
+  END_CPP11
+}
+// polyline_set.cpp
+cpp11::writable::logicals polylineset_do_intersect(polyline_set_p geometries, polyline_set_p other);
+extern "C" SEXP _polyclid_polylineset_do_intersect(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_do_intersect(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_polygonset_union(polyline_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polylineset_polygonset_union(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_polygonset_union(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_polygonset_intersection(polyline_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polylineset_polygonset_intersection(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_polygonset_intersection(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_polygonset_difference(polyline_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polylineset_polygonset_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_polygonset_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polygonset_polylineset_difference(polyline_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polygonset_polylineset_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygonset_polylineset_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
+// polyline_set.cpp
+poly_vector_base_p polylineset_polygonset_symmetric_difference(polyline_set_p geometries, polygon_set_p other);
+extern "C" SEXP _polyclid_polylineset_polygonset_symmetric_difference(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polylineset_polygonset_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
+  END_CPP11
+}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_polyclid_create_polygon_empty",          (DL_FUNC) &_polyclid_create_polygon_empty,          0},
-    {"_polyclid_create_polygon_list",           (DL_FUNC) &_polyclid_create_polygon_list,           1},
-    {"_polyclid_create_polygon_list_list",      (DL_FUNC) &_polyclid_create_polygon_list_list,      1},
-    {"_polyclid_create_polygon_single",         (DL_FUNC) &_polyclid_create_polygon_single,         1},
-    {"_polyclid_create_polygon_triangle",       (DL_FUNC) &_polyclid_create_polygon_triangle,       1},
-    {"_polyclid_create_polyline_empty",         (DL_FUNC) &_polyclid_create_polyline_empty,         0},
-    {"_polyclid_create_polyline_list",          (DL_FUNC) &_polyclid_create_polyline_list,          1},
-    {"_polyclid_create_polyline_segment",       (DL_FUNC) &_polyclid_create_polyline_segment,       1},
-    {"_polyclid_create_polyline_single",        (DL_FUNC) &_polyclid_create_polyline_single,        1},
-    {"_polyclid_poly_any_duplicated",           (DL_FUNC) &_polyclid_poly_any_duplicated,           1},
-    {"_polyclid_poly_any_na",                   (DL_FUNC) &_polyclid_poly_any_na,                   1},
-    {"_polyclid_poly_approx_area",              (DL_FUNC) &_polyclid_poly_approx_area,              1},
-    {"_polyclid_poly_approx_length",            (DL_FUNC) &_polyclid_poly_approx_length,            1},
-    {"_polyclid_poly_assign",                   (DL_FUNC) &_polyclid_poly_assign,                   3},
-    {"_polyclid_poly_bbox",                     (DL_FUNC) &_polyclid_poly_bbox,                     1},
-    {"_polyclid_poly_cardinality",              (DL_FUNC) &_polyclid_poly_cardinality,              1},
-    {"_polyclid_poly_combine",                  (DL_FUNC) &_polyclid_poly_combine,                  2},
-    {"_polyclid_poly_copy",                     (DL_FUNC) &_polyclid_poly_copy,                     1},
-    {"_polyclid_poly_definition",               (DL_FUNC) &_polyclid_poly_definition,               3},
-    {"_polyclid_poly_definition_names",         (DL_FUNC) &_polyclid_poly_definition_names,         1},
-    {"_polyclid_poly_duplicated",               (DL_FUNC) &_polyclid_poly_duplicated,               1},
-    {"_polyclid_poly_edges",                    (DL_FUNC) &_polyclid_poly_edges,                    2},
-    {"_polyclid_poly_format",                   (DL_FUNC) &_polyclid_poly_format,                   1},
-    {"_polyclid_poly_has_point_inside",         (DL_FUNC) &_polyclid_poly_has_point_inside,         2},
-    {"_polyclid_poly_has_point_on",             (DL_FUNC) &_polyclid_poly_has_point_on,             2},
-    {"_polyclid_poly_has_point_on_negative",    (DL_FUNC) &_polyclid_poly_has_point_on_negative,    2},
-    {"_polyclid_poly_has_point_on_positive",    (DL_FUNC) &_polyclid_poly_has_point_on_positive,    2},
-    {"_polyclid_poly_has_point_outside",        (DL_FUNC) &_polyclid_poly_has_point_outside,        2},
-    {"_polyclid_poly_is_degenerate",            (DL_FUNC) &_polyclid_poly_is_degenerate,            1},
-    {"_polyclid_poly_is_equal",                 (DL_FUNC) &_polyclid_poly_is_equal,                 2},
-    {"_polyclid_poly_is_na",                    (DL_FUNC) &_polyclid_poly_is_na,                    1},
-    {"_polyclid_poly_length",                   (DL_FUNC) &_polyclid_poly_length,                   1},
-    {"_polyclid_poly_n_edges",                  (DL_FUNC) &_polyclid_poly_n_edges,                  1},
-    {"_polyclid_poly_primitive_type",           (DL_FUNC) &_polyclid_poly_primitive_type,           1},
-    {"_polyclid_poly_reverse_orientation",      (DL_FUNC) &_polyclid_poly_reverse_orientation,      1},
-    {"_polyclid_poly_set_definition",           (DL_FUNC) &_polyclid_poly_set_definition,           4},
-    {"_polyclid_poly_set_vertex",               (DL_FUNC) &_polyclid_poly_set_vertex,               3},
-    {"_polyclid_poly_subset",                   (DL_FUNC) &_polyclid_poly_subset,                   2},
-    {"_polyclid_poly_to_matrix",                (DL_FUNC) &_polyclid_poly_to_matrix,                1},
-    {"_polyclid_poly_transform",                (DL_FUNC) &_polyclid_poly_transform,                2},
-    {"_polyclid_poly_unique",                   (DL_FUNC) &_polyclid_poly_unique,                   1},
-    {"_polyclid_poly_vertex",                   (DL_FUNC) &_polyclid_poly_vertex,                   2},
-    {"_polyclid_polygon_add_hole",              (DL_FUNC) &_polyclid_polygon_add_hole,              2},
-    {"_polyclid_polygon_connect_holes",         (DL_FUNC) &_polyclid_polygon_connect_holes,         1},
-    {"_polyclid_polygon_get_boundary",          (DL_FUNC) &_polyclid_polygon_get_boundary,          1},
-    {"_polyclid_polygon_get_hole",              (DL_FUNC) &_polyclid_polygon_get_hole,              2},
-    {"_polyclid_polygon_is_clockwise",          (DL_FUNC) &_polyclid_polygon_is_clockwise,          1},
-    {"_polyclid_polygon_is_collinear",          (DL_FUNC) &_polyclid_polygon_is_collinear,          1},
-    {"_polyclid_polygon_is_convex",             (DL_FUNC) &_polyclid_polygon_is_convex,             1},
-    {"_polyclid_polygon_is_counterclockwise",   (DL_FUNC) &_polyclid_polygon_is_counterclockwise,   1},
-    {"_polyclid_polygon_is_relatively_simple",  (DL_FUNC) &_polyclid_polygon_is_relatively_simple,  1},
-    {"_polyclid_polygon_is_simple",             (DL_FUNC) &_polyclid_polygon_is_simple,             1},
-    {"_polyclid_polygon_is_valid",              (DL_FUNC) &_polyclid_polygon_is_valid,              1},
-    {"_polyclid_polygon_make_valid",            (DL_FUNC) &_polyclid_polygon_make_valid,            1},
-    {"_polyclid_polygon_n_holes",               (DL_FUNC) &_polyclid_polygon_n_holes,               1},
-    {"_polyclid_polygon_remove_hole",           (DL_FUNC) &_polyclid_polygon_remove_hole,           2},
-    {"_polyclid_polygon_set_boundary",          (DL_FUNC) &_polyclid_polygon_set_boundary,          2},
-    {"_polyclid_polygon_set_hole",              (DL_FUNC) &_polyclid_polygon_set_hole,              3},
-    {"_polyclid_polygon_sub_cardinality",       (DL_FUNC) &_polyclid_polygon_sub_cardinality,       1},
-    {"_polyclid_polyline_is_selfintersecting",  (DL_FUNC) &_polyclid_polyline_is_selfintersecting,  1},
-    {"_polyclid_polyline_is_x_monotone",        (DL_FUNC) &_polyclid_polyline_is_x_monotone,        1},
-    {"_polyclid_polyline_is_x_weakly_monotone", (DL_FUNC) &_polyclid_polyline_is_x_weakly_monotone, 1},
-    {"_polyclid_polyline_is_y_monotone",        (DL_FUNC) &_polyclid_polyline_is_y_monotone,        1},
-    {"_polyclid_polyline_is_y_weakly_monotone", (DL_FUNC) &_polyclid_polyline_is_y_weakly_monotone, 1},
+    {"_polyclid_create_polygon_empty",                        (DL_FUNC) &_polyclid_create_polygon_empty,                        0},
+    {"_polyclid_create_polygon_list",                         (DL_FUNC) &_polyclid_create_polygon_list,                         1},
+    {"_polyclid_create_polygon_list_list",                    (DL_FUNC) &_polyclid_create_polygon_list_list,                    1},
+    {"_polyclid_create_polygon_single",                       (DL_FUNC) &_polyclid_create_polygon_single,                       1},
+    {"_polyclid_create_polygon_triangle",                     (DL_FUNC) &_polyclid_create_polygon_triangle,                     1},
+    {"_polyclid_create_polygonset_empty",                     (DL_FUNC) &_polyclid_create_polygonset_empty,                     0},
+    {"_polyclid_create_polygonset_list",                      (DL_FUNC) &_polyclid_create_polygonset_list,                      1},
+    {"_polyclid_create_polygonset_polygon",                   (DL_FUNC) &_polyclid_create_polygonset_polygon,                   1},
+    {"_polyclid_create_polyline_empty",                       (DL_FUNC) &_polyclid_create_polyline_empty,                       0},
+    {"_polyclid_create_polyline_list",                        (DL_FUNC) &_polyclid_create_polyline_list,                        1},
+    {"_polyclid_create_polyline_segment",                     (DL_FUNC) &_polyclid_create_polyline_segment,                     1},
+    {"_polyclid_create_polyline_single",                      (DL_FUNC) &_polyclid_create_polyline_single,                      1},
+    {"_polyclid_create_polylineset_empty",                    (DL_FUNC) &_polyclid_create_polylineset_empty,                    0},
+    {"_polyclid_create_polylineset_list",                     (DL_FUNC) &_polyclid_create_polylineset_list,                     1},
+    {"_polyclid_create_polylineset_polyline",                 (DL_FUNC) &_polyclid_create_polylineset_polyline,                 1},
+    {"_polyclid_poly_any_duplicated",                         (DL_FUNC) &_polyclid_poly_any_duplicated,                         1},
+    {"_polyclid_poly_any_na",                                 (DL_FUNC) &_polyclid_poly_any_na,                                 1},
+    {"_polyclid_poly_approx_area",                            (DL_FUNC) &_polyclid_poly_approx_area,                            1},
+    {"_polyclid_poly_approx_length",                          (DL_FUNC) &_polyclid_poly_approx_length,                          1},
+    {"_polyclid_poly_assign",                                 (DL_FUNC) &_polyclid_poly_assign,                                 3},
+    {"_polyclid_poly_bbox",                                   (DL_FUNC) &_polyclid_poly_bbox,                                   1},
+    {"_polyclid_poly_cardinality",                            (DL_FUNC) &_polyclid_poly_cardinality,                            1},
+    {"_polyclid_poly_combine",                                (DL_FUNC) &_polyclid_poly_combine,                                2},
+    {"_polyclid_poly_copy",                                   (DL_FUNC) &_polyclid_poly_copy,                                   1},
+    {"_polyclid_poly_definition",                             (DL_FUNC) &_polyclid_poly_definition,                             3},
+    {"_polyclid_poly_definition_names",                       (DL_FUNC) &_polyclid_poly_definition_names,                       1},
+    {"_polyclid_poly_duplicated",                             (DL_FUNC) &_polyclid_poly_duplicated,                             1},
+    {"_polyclid_poly_edges",                                  (DL_FUNC) &_polyclid_poly_edges,                                  2},
+    {"_polyclid_poly_format",                                 (DL_FUNC) &_polyclid_poly_format,                                 1},
+    {"_polyclid_poly_has_point_inside",                       (DL_FUNC) &_polyclid_poly_has_point_inside,                       2},
+    {"_polyclid_poly_has_point_on",                           (DL_FUNC) &_polyclid_poly_has_point_on,                           2},
+    {"_polyclid_poly_has_point_on_negative",                  (DL_FUNC) &_polyclid_poly_has_point_on_negative,                  2},
+    {"_polyclid_poly_has_point_on_positive",                  (DL_FUNC) &_polyclid_poly_has_point_on_positive,                  2},
+    {"_polyclid_poly_has_point_outside",                      (DL_FUNC) &_polyclid_poly_has_point_outside,                      2},
+    {"_polyclid_poly_is_degenerate",                          (DL_FUNC) &_polyclid_poly_is_degenerate,                          1},
+    {"_polyclid_poly_is_equal",                               (DL_FUNC) &_polyclid_poly_is_equal,                               2},
+    {"_polyclid_poly_is_na",                                  (DL_FUNC) &_polyclid_poly_is_na,                                  1},
+    {"_polyclid_poly_length",                                 (DL_FUNC) &_polyclid_poly_length,                                 1},
+    {"_polyclid_poly_n_edges",                                (DL_FUNC) &_polyclid_poly_n_edges,                                1},
+    {"_polyclid_poly_primitive_type",                         (DL_FUNC) &_polyclid_poly_primitive_type,                         1},
+    {"_polyclid_poly_reverse_orientation",                    (DL_FUNC) &_polyclid_poly_reverse_orientation,                    1},
+    {"_polyclid_poly_set_definition",                         (DL_FUNC) &_polyclid_poly_set_definition,                         4},
+    {"_polyclid_poly_set_vertex",                             (DL_FUNC) &_polyclid_poly_set_vertex,                             3},
+    {"_polyclid_poly_subset",                                 (DL_FUNC) &_polyclid_poly_subset,                                 2},
+    {"_polyclid_poly_to_matrix",                              (DL_FUNC) &_polyclid_poly_to_matrix,                              1},
+    {"_polyclid_poly_transform",                              (DL_FUNC) &_polyclid_poly_transform,                              2},
+    {"_polyclid_poly_unique",                                 (DL_FUNC) &_polyclid_poly_unique,                                 1},
+    {"_polyclid_poly_vertex",                                 (DL_FUNC) &_polyclid_poly_vertex,                                 2},
+    {"_polyclid_polygon_add_hole",                            (DL_FUNC) &_polyclid_polygon_add_hole,                            2},
+    {"_polyclid_polygon_connect_holes",                       (DL_FUNC) &_polyclid_polygon_connect_holes,                       1},
+    {"_polyclid_polygon_get_boundary",                        (DL_FUNC) &_polyclid_polygon_get_boundary,                        1},
+    {"_polyclid_polygon_get_hole",                            (DL_FUNC) &_polyclid_polygon_get_hole,                            2},
+    {"_polyclid_polygon_has_boundary",                        (DL_FUNC) &_polyclid_polygon_has_boundary,                        1},
+    {"_polyclid_polygon_is_clockwise",                        (DL_FUNC) &_polyclid_polygon_is_clockwise,                        1},
+    {"_polyclid_polygon_is_collinear",                        (DL_FUNC) &_polyclid_polygon_is_collinear,                        1},
+    {"_polyclid_polygon_is_convex",                           (DL_FUNC) &_polyclid_polygon_is_convex,                           1},
+    {"_polyclid_polygon_is_counterclockwise",                 (DL_FUNC) &_polyclid_polygon_is_counterclockwise,                 1},
+    {"_polyclid_polygon_is_relatively_simple",                (DL_FUNC) &_polyclid_polygon_is_relatively_simple,                1},
+    {"_polyclid_polygon_is_simple",                           (DL_FUNC) &_polyclid_polygon_is_simple,                           1},
+    {"_polyclid_polygon_is_valid",                            (DL_FUNC) &_polyclid_polygon_is_valid,                            1},
+    {"_polyclid_polygon_make_valid",                          (DL_FUNC) &_polyclid_polygon_make_valid,                          1},
+    {"_polyclid_polygon_n_holes",                             (DL_FUNC) &_polyclid_polygon_n_holes,                             1},
+    {"_polyclid_polygon_remove_hole",                         (DL_FUNC) &_polyclid_polygon_remove_hole,                         2},
+    {"_polyclid_polygon_set_boundary",                        (DL_FUNC) &_polyclid_polygon_set_boundary,                        2},
+    {"_polyclid_polygon_set_hole",                            (DL_FUNC) &_polyclid_polygon_set_hole,                            3},
+    {"_polyclid_polygon_sub_cardinality",                     (DL_FUNC) &_polyclid_polygon_sub_cardinality,                     1},
+    {"_polyclid_polygonset_complement",                       (DL_FUNC) &_polyclid_polygonset_complement,                       1},
+    {"_polyclid_polygonset_cum_difference",                   (DL_FUNC) &_polyclid_polygonset_cum_difference,                   1},
+    {"_polyclid_polygonset_cum_intersection",                 (DL_FUNC) &_polyclid_polygonset_cum_intersection,                 1},
+    {"_polyclid_polygonset_cum_symmetric_difference",         (DL_FUNC) &_polyclid_polygonset_cum_symmetric_difference,         1},
+    {"_polyclid_polygonset_cum_union",                        (DL_FUNC) &_polyclid_polygonset_cum_union,                        1},
+    {"_polyclid_polygonset_difference",                       (DL_FUNC) &_polyclid_polygonset_difference,                       2},
+    {"_polyclid_polygonset_do_intersect",                     (DL_FUNC) &_polyclid_polygonset_do_intersect,                     2},
+    {"_polyclid_polygonset_get_all_polygon",                  (DL_FUNC) &_polyclid_polygonset_get_all_polygon,                  1},
+    {"_polyclid_polygonset_get_polygon",                      (DL_FUNC) &_polyclid_polygonset_get_polygon,                      2},
+    {"_polyclid_polygonset_intersection",                     (DL_FUNC) &_polyclid_polygonset_intersection,                     2},
+    {"_polyclid_polygonset_locate",                           (DL_FUNC) &_polyclid_polygonset_locate,                           2},
+    {"_polyclid_polygonset_n_polygons",                       (DL_FUNC) &_polyclid_polygonset_n_polygons,                       1},
+    {"_polyclid_polygonset_polylineset_difference",           (DL_FUNC) &_polyclid_polygonset_polylineset_difference,           2},
+    {"_polyclid_polygonset_symmetric_difference",             (DL_FUNC) &_polyclid_polygonset_symmetric_difference,             2},
+    {"_polyclid_polygonset_union",                            (DL_FUNC) &_polyclid_polygonset_union,                            2},
+    {"_polyclid_polyline_is_selfintersecting",                (DL_FUNC) &_polyclid_polyline_is_selfintersecting,                1},
+    {"_polyclid_polyline_is_x_monotone",                      (DL_FUNC) &_polyclid_polyline_is_x_monotone,                      1},
+    {"_polyclid_polyline_is_x_weakly_monotone",               (DL_FUNC) &_polyclid_polyline_is_x_weakly_monotone,               1},
+    {"_polyclid_polyline_is_y_monotone",                      (DL_FUNC) &_polyclid_polyline_is_y_monotone,                      1},
+    {"_polyclid_polyline_is_y_weakly_monotone",               (DL_FUNC) &_polyclid_polyline_is_y_weakly_monotone,               1},
+    {"_polyclid_polylineset_cum_difference",                  (DL_FUNC) &_polyclid_polylineset_cum_difference,                  1},
+    {"_polyclid_polylineset_cum_intersection",                (DL_FUNC) &_polyclid_polylineset_cum_intersection,                1},
+    {"_polyclid_polylineset_cum_symmetric_difference",        (DL_FUNC) &_polyclid_polylineset_cum_symmetric_difference,        1},
+    {"_polyclid_polylineset_cum_union",                       (DL_FUNC) &_polyclid_polylineset_cum_union,                       1},
+    {"_polyclid_polylineset_difference",                      (DL_FUNC) &_polyclid_polylineset_difference,                      2},
+    {"_polyclid_polylineset_do_intersect",                    (DL_FUNC) &_polyclid_polylineset_do_intersect,                    2},
+    {"_polyclid_polylineset_get_all_polylines",               (DL_FUNC) &_polyclid_polylineset_get_all_polylines,               1},
+    {"_polyclid_polylineset_get_all_polylines_simplified",    (DL_FUNC) &_polyclid_polylineset_get_all_polylines_simplified,    1},
+    {"_polyclid_polylineset_get_faces",                       (DL_FUNC) &_polyclid_polylineset_get_faces,                       1},
+    {"_polyclid_polylineset_get_polylines",                   (DL_FUNC) &_polyclid_polylineset_get_polylines,                   2},
+    {"_polyclid_polylineset_get_polylines_simplified",        (DL_FUNC) &_polyclid_polylineset_get_polylines_simplified,        2},
+    {"_polyclid_polylineset_intersection",                    (DL_FUNC) &_polyclid_polylineset_intersection,                    2},
+    {"_polyclid_polylineset_n_faces",                         (DL_FUNC) &_polyclid_polylineset_n_faces,                         1},
+    {"_polyclid_polylineset_n_polylines",                     (DL_FUNC) &_polyclid_polylineset_n_polylines,                     1},
+    {"_polyclid_polylineset_n_polylines_simplified",          (DL_FUNC) &_polyclid_polylineset_n_polylines_simplified,          1},
+    {"_polyclid_polylineset_polygonset_difference",           (DL_FUNC) &_polyclid_polylineset_polygonset_difference,           2},
+    {"_polyclid_polylineset_polygonset_intersection",         (DL_FUNC) &_polyclid_polylineset_polygonset_intersection,         2},
+    {"_polyclid_polylineset_polygonset_symmetric_difference", (DL_FUNC) &_polyclid_polylineset_polygonset_symmetric_difference, 2},
+    {"_polyclid_polylineset_polygonset_union",                (DL_FUNC) &_polyclid_polylineset_polygonset_union,                2},
+    {"_polyclid_polylineset_polyline_verts",                  (DL_FUNC) &_polyclid_polylineset_polyline_verts,                  1},
+    {"_polyclid_polylineset_symmetric_difference",            (DL_FUNC) &_polyclid_polylineset_symmetric_difference,            2},
+    {"_polyclid_polylineset_union",                           (DL_FUNC) &_polyclid_polylineset_union,                           2},
+    {"_polyclid_polylineset_vert_degree",                     (DL_FUNC) &_polyclid_polylineset_vert_degree,                     1},
+    {"_polyclid_polylineset_vert_neighbors",                  (DL_FUNC) &_polyclid_polylineset_vert_neighbors,                  1},
     {NULL, NULL, 0}
 };
 }

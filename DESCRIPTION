@@ -1,6 +1,6 @@
 Package: polyclid
 Type: Package
-Title: Polygon Support for Euclid 
+Title: Polygon and Polyline Support for Euclid 
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Thomas Lin",
@@ -27,12 +27,14 @@ Depends:
 Imports: 
     cli,
     graphics,
-    grid
+    grid,
+    utils,
+    rlang
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/thomasp85/polyclid
 BugReports: https://github.com/thomasp85/polyclid/issues
 Remotes: 
-    dickoa/cgalh
+    dickoa/cgalh,
     thomasp85/euclid
 Suggests: 
     covr

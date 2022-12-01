@@ -107,6 +107,18 @@ public:
     return res;
   }
 
+  cpp11::writable::logicals has_boundary() const {
+    cpp11::writable::logicals res;
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na()) {
+        res.push_back(NA_LOGICAL);
+      } else {
+        res.push_back((Rboolean) _storage[i].is_unbounded());
+      }
+    }
+    return res;
+  }
+
   std::vector<Polygon> get_boundary() const {
     std::vector<Polygon> res;
     res.reserve(size());

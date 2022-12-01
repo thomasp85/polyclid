@@ -4,36 +4,39 @@
 #' contain one or more holes. They must be fully contained inside the outer
 #' boundary.
 #'
-#' @param points A vector of points, or a list. See the *Constructors* sections
+#' @param ... Vector of points, numerics, or a list. See the *Constructors*
+#' sections
 #' @param id An integer vector of the same length as `points`, dividing the
 #' points into separate polygons (only used if `points` is a point vector)
-#' @param holes_id An integer vector of the same length as `points`, dividing
+#' @param hole_id An integer vector of the same length as `points`, dividing
 #' the points into boundary and separate holes (only used if `points` is a point
 #' vector).
 #' @param x An object convertible to a polygon vector or a polygon vector
-#' @param ... arguments passed on to methods
 #'
 #' @return An `polyclid_polygon` vector
 #'
 #' @section Constructors:
-#' - Providing a points vector and no `id` and `holes_id` will construct a
+#' - Providing a 2D points vector and no `id` and `holes_id` will construct a
 #'   single polygon with no holes
-#' - Providing a points vector and an `id` vector will create a vector of
+#' - Providing a 2D points vector and an `id` vector will create a vector of
 #'   polygons with no holes
-#' - Providing a points vector and a `holes_id` vector will construct a single
+#' - Providing a 2D points vector and a `holes_id` vector will construct a single
 #'   polygon with holes
-#' - Providing a points vector, an `id` vector, and a `holes_id` vector will
+#' - Providing a 2D points vector, an `id` vector, and a `holes_id` vector will
 #'   construct a vector of polygons with holes
-#' - Providing a list of point vectors will construct a vector of polygons with
-#'   no holes
-#' - Providing a list of list of point vectors will construct a vector of
+#' - For all above, instead of a 2D point vector the x and y coordinates can be
+#'   supplied directly
+#' - Providing a list of 2D point vectors will construct a vector of polygons
+#'   with no holes
+#' - Providing a list of list of 2D point vectors will construct a vector of
 #'   polygons with holes
 #'
 #' Further, polygons can also be constructed from 2D segments and triangles
 #' using the `as_polygon()` function.
 #'
 #' @export
-#' @importFrom euclid is_point
+#' @importFrom euclid point is_exact_numeric
+#' @family polygons
 #'
 #' @examples
 #' points <- euclid::point(
@@ -46,6 +49,12 @@
 #' poly
 #'
 #' plot(poly, col = "grey")
+#'
+#' # Or directly from x and y coordinates
+#' poly <- polygon(
+#'   c(1, 0, -1, -0.5, 0.5),
+#'   c(0, 1, 0, -1, -1)
+#' )
 #'
 #' # Use id to split points into multiple polygons
 #' poly <- polygon(points[c(1, 2, 3, 4, 5, 1)], id = rep(1:2, each = 3))
@@ -81,8 +90,31 @@
 #' unique(polys)
 #' duplicated(polys)
 #'
-polygon <- function(points, id = NULL, hole_id = NULL) {
-  if (is_point(points)) {
+polygon <- function(..., id = NULL, hole_id = NULL) {
+  args <- list(...)
+  points <- args[[1]]
+  if (is_bare_list(points)) {
+    holes <- !all(vapply(points, is_2d_point, logical(1)))
+    need_split <- FALSE
+    if (holes) {
+      if (!all(vapply(points, function(x) all(vapply(x, is_2d_point, logical(1))), logical(1)))) {
+        cli_abort(c(
+          "Malformed list input when constructing polygon.",
+          i = "input must be a list of 2D point vectors or a list of lists of 2D point vectors"
+        ))
+      }
+    }
+  } else if ((is.numeric(args[[1]]) || is_exact_numeric(args[[1]])) &&
+             (is.numeric(args[[2]]) || is_exact_numeric(args[[2]]))) {
+    need_split <- TRUE
+    points <- point(args[[1]], args[[2]])
+  } else if (is_2d_point(points)) {
+    need_split <- TRUE
+  } else {
+    cli_abort("Don't know how to construct polygons from the given input")
+  }
+
+  if (need_split) {
     if (is.null(hole_id)) {
       if (is.null(id)) {
         return(new_poly_vector(create_polygon_single(points)))
@@ -99,15 +131,7 @@ polygon <- function(points, id = NULL, hole_id = NULL) {
       points <- Map(split, points, hole_id)
       holes <- TRUE
     }
-  } else {
-    holes <- !all(vapply(points, is_point, logical(1)))
-    if (holes) {
-      if (!vapply(points, function(x) all(vapply(x, is_point, logical(1))), logical(1))) {
-        abort("Polygons can only be constructed from a vector of points, a list of point vectors, or a list of list of point vectors")
-      }
-    }
   }
-
   if (holes) {
     new_poly_vector(create_polygon_list_list(points))
   } else {
@@ -132,6 +156,10 @@ as_polygon.euclid_triangle2 <- function(x, ...) {
   new_poly_vector(create_polygon_triangle(x))
 }
 #' @export
+as_polygon.euclid_iso_rect <- function(x, ...) {
+  polygon(vert(x), id = rep(seq_along(x), each = 4))
+}
+#' @export
 #' @importFrom euclid vert approx_radius vec
 as_polygon.euclid_circle2 <- function(x, n = 100, ...) {
   center <- vert(x)
@@ -141,3 +169,6 @@ as_polygon.euclid_circle2 <- function(x, n = 100, ...) {
   polys <- split(rep(center, each = n) + boundary, rep(seq_along(x), each = n))
   new_poly_vector(create_polygon_list(polys))
 }
+
+#' @importFrom euclid is_point
+is_2d_point <- function(x) is_point(x) && dim(x) == 2

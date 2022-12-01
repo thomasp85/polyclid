@@ -88,16 +88,33 @@ polygon_p create_polygon_triangle(SEXP triangles) {
 
 [[cpp11::register]]
 cpp11::writable::integers polygon_sub_cardinality(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   return geometries->sub_cardinality();
 }
 
 [[cpp11::register]]
 cpp11::writable::integers polygon_n_holes(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   return geometries->n_holes();
 }
 
 [[cpp11::register]]
+cpp11::writable::logicals polygon_has_boundary(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  return geometries->has_boundary();
+}
+
+[[cpp11::register]]
 polygon_p polygon_get_boundary(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> boundary = geometries->get_boundary();
   polygon *result(new polygon(boundary));
   return {result};
@@ -105,6 +122,9 @@ polygon_p polygon_get_boundary(polygon_p geometries) {
 
 [[cpp11::register]]
 polygon_p polygon_set_boundary(polygon_p geometries, polygon_p other) {
+  if (geometries.get() == nullptr || other.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> poly = geometries->set_boundary(other->get_storage());
   polygon *result(new polygon(poly));
   return {result};
@@ -112,6 +132,9 @@ polygon_p polygon_set_boundary(polygon_p geometries, polygon_p other) {
 
 [[cpp11::register]]
 polygon_p polygon_get_hole(polygon_p geometries, cpp11::integers which) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> poly = geometries->get_hole(which);
   polygon *result(new polygon(poly));
   return {result};
@@ -119,6 +142,9 @@ polygon_p polygon_get_hole(polygon_p geometries, cpp11::integers which) {
 
 [[cpp11::register]]
 polygon_p polygon_remove_hole(polygon_p geometries, cpp11::integers which) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> poly = geometries->remove_hole(which);
   polygon *result(new polygon(poly));
   return {result};
@@ -126,6 +152,9 @@ polygon_p polygon_remove_hole(polygon_p geometries, cpp11::integers which) {
 
 [[cpp11::register]]
 polygon_p polygon_add_hole(polygon_p geometries, polygon_p other) {
+  if (geometries.get() == nullptr || other.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> poly = geometries->add_hole(other->get_storage());
   polygon *result(new polygon(poly));
   return {result};
@@ -133,6 +162,9 @@ polygon_p polygon_add_hole(polygon_p geometries, polygon_p other) {
 
 [[cpp11::register]]
 polygon_p polygon_set_hole(polygon_p geometries, cpp11::integers which, polygon_p other) {
+  if (geometries.get() == nullptr || other.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
   std::vector<Polygon> poly = geometries->set_hole(which, other->get_storage());
   polygon *result(new polygon(poly));
   return {result};

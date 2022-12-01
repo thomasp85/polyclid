@@ -3,6 +3,7 @@
 \name{polygon_rings}
 \alias{polygon_rings}
 \alias{n_holes}
+\alias{is_bounded}
 \alias{boundary}
 \alias{boundary<-}
 \alias{hole}
@@ -12,13 +13,15 @@
 \usage{
 n_holes(x)
 
+is_bounded(x)
+
 boundary(x)
 
 boundary(x) <- value
 
-hole(x, index)
+hole(x, which)
 
-hole(x, index = NULL) <- value
+hole(x, which = NULL) <- value
 
 connect_holes(x)
 }
@@ -46,10 +49,8 @@ edges.
 }
 \examples{
 poly <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0, 1, 5, 1),
-    c(0, 0, 10, 10, 1, 1, 5)
-  ),
+  c(0, 10, 10, 0, 1, 5, 1),
+  c(0, 0, 10, 10, 1, 1, 5),
   hole_id = c(1, 1, 1, 1, 2, 2, 2)
 )
 plot(poly, col = "grey")

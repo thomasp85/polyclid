@@ -34,28 +34,20 @@ requirements of rings in a valid polygon.
 \examples{
 
 square <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0),
-    c(0, 0, 10, 10)
-  )
+  c(0, 10, 10, 0),
+  c(0, 0, 10, 10)
 )
 cross <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0),
-    c(0, 10, 0, 10)
-  )
+  c(0, 10, 10, 0),
+  c(0, 10, 0, 10)
 )
 butterfly <- polygon(
-  euclid::point(
-    c(0, 5, 10, 10, 5, 0),
-    c(0, 5, 0, 10, 5, 10)
-  )
+  c(0, 5, 10, 10, 5, 0),
+  c(0, 5, 0, 10, 5, 10)
 )
 cross2 <- polygon(
-  euclid::point(
-    c(0, 5, 10, 10, 5, 0),
-    c(0, 5, 10, 0, 5, 10)
-  )
+  c(0, 5, 10, 10, 5, 0),
+  c(0, 5, 10, 0, 5, 10)
 )
 is_convex(square)
 is_convex(cross)

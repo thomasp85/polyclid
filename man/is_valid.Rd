@@ -60,10 +60,8 @@ valid it is returned as is.
 \examples{
 
 poly <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0),
-    c(10, 10, 0, 0)
-  )
+  c(0, 10, 10, 0),
+  c(10, 10, 0, 0)
 )
 
 # Outer boundary must be counterclockwise for the polygon to be valid
@@ -74,10 +72,8 @@ poly <- reverse_orientation(poly)
 is_valid(poly)
 
 h <- polygon(
-  euclid::point(
-    c(2, 4, 2),
-    c(2, 2, 4)
-  )
+  c(2, 4, 2),
+  c(2, 2, 4)
 )
 
 # Holes must be clockwise
@@ -103,10 +99,8 @@ is_valid(poly)
 # not all polygons can be made valid, specifically rings that are not
 # relatively simple cannot be fixed
 poly <- polygon(
-  euclid::point(
-    c(0, 10, 10, 0),
-    c(0, 10, 0, 10)
-  )
+  c(0, 10, 10, 0),
+  c(0, 10, 0, 10)
 )
 is_valid(poly)
 plot(poly, force_valid = FALSE)
