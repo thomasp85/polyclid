@@ -89,6 +89,9 @@ p_sym_dif <- symmetric_difference(rects, circs)
 plot(p_sym_dif, col = c("grey", "red"))
 }
 \seealso{
+To get a complete overview of the boolean operations possible with
+polygon sets see the \link[=poly_bool]{dedicated help page on the topic}
+
 Other polygons: 
 \code{\link{polygon}()}
 

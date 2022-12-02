@@ -103,11 +103,11 @@ cpp11::writable::integers polygon_n_holes(polygon_p geometries) {
 }
 
 [[cpp11::register]]
-cpp11::writable::logicals polygon_has_boundary(polygon_p geometries) {
+cpp11::writable::logicals polygon_is_unbounded(polygon_p geometries) {
   if (geometries.get() == nullptr) {
     cpp11::stop("Data structure pointer cleared from memory");
   }
-  return geometries->has_boundary();
+  return geometries->is_unbounded();
 }
 
 [[cpp11::register]]

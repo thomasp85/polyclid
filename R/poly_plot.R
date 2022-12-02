@@ -1,4 +1,5 @@
 #' @importFrom graphics plot plot.new plot.window Axis title box
+#' @importFrom euclid bbox
 #' @export
 plot.polyclid_geometry <- function(x, y, xlim = NULL, ylim = NULL, add = FALSE, axes = TRUE, frame.plot = axes, ...) {
   grDevices::dev.hold()
@@ -7,6 +8,10 @@ plot.polyclid_geometry <- function(x, y, xlim = NULL, ylim = NULL, add = FALSE, 
     if (is.null(xlim) || is.null(ylim)) {
       cbox <- as_bbox(x)
       cbox <- as.matrix(sum(cbox, na.rm = TRUE))
+      if (any(is.infinite(cbox))) {
+        cbox <- bbox(vert(x))
+        cbox <- as.matrix(sum(cbox, na.rm = TRUE))
+      }
       if (is.null(xlim)) xlim <- cbox[c(1, 3)]
       if (is.null(ylim)) ylim <- cbox[c(2, 4)]
       if (xlim[1] == xlim[2]) xlim <- xlim + c(-0.5, 0.5)
@@ -51,9 +56,9 @@ euclid_plot.polyclid_polygon <- function(x, ..., force_valid = TRUE, mapping_pla
     p <- lapply(pars, `[`, i)
     coords <- as.matrix(poly)
     holes <- cardinality(poly, split = TRUE)
-    if (!is_bounded(poly)) {
+    if (is_unbounded(poly)) {
       coords <- rbind(plot_lim, coords)
-      holes <- c(4, holes)
+      holes[1] <- 4
     }
     holes <- rep(seq_along(holes), holes)
     index <- unlist(lapply(split(seq_len(nrow(coords)), holes), function(i) c(NA_integer_, i)))[-1]

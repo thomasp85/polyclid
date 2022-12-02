@@ -110,6 +110,9 @@ duplicated(polys)
 
 }
 \seealso{
+To get a complete overview of the boolean operations possible with
+polygons see the \link[=poly_bool]{dedicated help page on the topic}
+
 Other polygons: 
 \code{\link{polygon_set}()}
 }

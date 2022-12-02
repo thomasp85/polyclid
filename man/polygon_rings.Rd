@@ -3,7 +3,7 @@
 \name{polygon_rings}
 \alias{polygon_rings}
 \alias{n_holes}
-\alias{is_bounded}
+\alias{is_unbounded}
 \alias{boundary}
 \alias{boundary<-}
 \alias{hole}
@@ -13,7 +13,7 @@
 \usage{
 n_holes(x)
 
-is_bounded(x)
+is_unbounded(x)
 
 boundary(x)
 

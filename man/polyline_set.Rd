@@ -81,6 +81,9 @@ polyline_verts(ps[2])
 
 }
 \seealso{
+To get a complete overview of the boolean operations possible with
+polyline sets see the \link[=poly_bool]{dedicated help page on the topic}
+
 Other polylines: 
 \code{\link{polyline}()}
 

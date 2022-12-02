@@ -61,6 +61,9 @@ reverse_orientation(polylines)
 
 }
 \seealso{
+To get a complete overview of the boolean operations possible with
+polylines see the \link[=poly_bool]{dedicated help page on the topic}
+
 Other polylines: 
 \code{\link{polyline_set}()}
 }

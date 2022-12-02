@@ -19,8 +19,9 @@
 #'
 #' @export
 #' @importFrom euclid is_point
-#' @family
-#' polylines
+#' @family polylines
+#' @seealso To get a complete overview of the boolean operations possible with
+#' polylines see the [dedicated help page on the topic][poly_bool]
 #'
 #' @examples
 #' sine <- polyline(

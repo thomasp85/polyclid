@@ -48,14 +48,12 @@ template <typename Arrangement> struct Overlay_traits {
     h->twin()->set_data(combine(h1->data(), h2->data()));
   }
   void create_edge(H_const_handle h1, F_const_handle f2, H_handle h) const {
-    int d = combine_face(h1->data(), f2->data());
-    h->set_data(d);
-    h->twin()->set_data(d);
+    h->set_data(h1->data());
+    h->twin()->set_data(h1->data());
   }
   void create_edge(F_const_handle f1, H_const_handle h2, H_handle h) const {
-    int d = combine_face(f1->data(), h2->data());
-    h->set_data(d);
-    h->twin()->set_data(d);
+    h->set_data(h2->data());
+    h->twin()->set_data(h2->data());
   }
 };
 

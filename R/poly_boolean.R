@@ -76,6 +76,106 @@
 #'
 #' @name poly_bool
 #' @rdname poly_bool
+#'
+#' @examples
+#' ## Polygons
+#'
+#' circ <- as_polygon(circle(euclid::point(0, 0), 1))
+#' rect1 <- polygon(
+#'   c(0.5, 1.5, 2.5, 1.5),
+#'   c(0, -1, 0, 1)
+#' )
+#' rect2 <- transform(rect1, euclid::affine_translate(vec(-3, 0)))
+#'
+#' # Union of disjoint polygons places them in the same set
+#' rects <- union(rect1, rect2)
+#' plot(rects)
+#'
+#' # Union of overlapping polygons
+#' plot(union(rects, circ))
+#'
+#' # Intersection of disjoint polygons is empty
+#' intersection(rect1, rect2)
+#'
+#' # For overlapping polygons it gives the overlap
+#' plot(intersection(rects, circ))
+#'
+#' # Difference cuts out one polygon from the other
+#' plot(difference(rects, circ))
+#' plot(difference(circ, rects))
+#'
+#' # and symmetric difference gives the disjoint parts
+#' plot(symmetric_difference(rects, circ), col = 'grey')
+#'
+#' # complement flippes it around, turning a bounded polygon into an unbounded
+#' plot(complement(rects), col = "grey")
+#'
+#' ## Polylines
+#'
+#' sine <- polyline(
+#'   seq(0, 2*pi, length.out = 20),
+#'   sin(seq(0, 2*pi, length.out = 20))
+#' )
+#' loop <- polyline(
+#'   c(0, 5, 6, 5, 0),
+#'   c(-1, 1, 0, -1, 1)
+#' )
+#' line <- polyline(
+#'   c(0, 4, 6),
+#'   c(0, -2, 0)
+#' )
+#'
+#' # Union combines the two polyline (sets) and splits up lines where they cross
+#' ps <- union(sine, loop)
+#' plot(ps)
+#' euclid_plot(vert(ps))
+#'
+#' # Union will both return the isolated vertices of the cross points along with
+#' # any overlapping segments
+#' ps <- intersection(sine, loop)
+#' plot(c(sine, loop))
+#' euclid_plot(vert(ps), col = "red")
+#'
+#' ps <- intersection(line, loop)
+#' plot(c(line, loop))
+#' euclid_plot(ps, col = "red", lty = 3, lwd = 4)
+#' euclid_plot(vert(ps)[vert_degree(ps) == 0], col = "red")
+#'
+#' # Difference will cut lines at intersection points and remove overlapping
+#' # segments from the first argument
+#' ps <- difference(loop, line)
+#' plot(ps)
+#' euclid_plot(vert(ps))
+#'
+#' # Symmetric difference will remove overlapping segments from the union
+#' ps <- symmetric_difference(loop, line)
+#' plot(ps)
+#' euclid_plot(vert(ps))
+#'
+#' ## Polygons and polylines
+#'
+#' # Union merges the two, removing any segments of the polyline interior to the
+#' # polygon
+#' plot(union(sine, circ))
+#'
+#' # Intersection returns the part of the polyline interior to the polygon
+#' plot(rect1, xlim = c(0, 6))
+#' euclid_plot(loop)
+#' euclid_plot(intersection(loop, rect1), col = "red", lwd = 4)
+#'
+#' # Difference depends on whether the polygon or polyline is the first argument
+#' # subtracting a polygon from a polyline removes the parts of the polyline
+#' # interior to the polygon
+#' plot(difference(loop, rect1))
+#'
+#' # subtracting a polyline from a polygon will cut the polygon along the lines
+#' # where the polyline intersects it
+#' plot(difference(rect1, loop))
+#'
+#' # Symmetric difference is the union of the two difference results which is
+#' # basically the overlay of the two topologies
+#' plot(symmetric_difference(rect1, loop))
+#'
 NULL
 
 ## Polygon Set

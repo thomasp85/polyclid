@@ -104,7 +104,7 @@ public:
   }
   void remove_with_flag(int flag) {
     for (auto iter = edges_begin(); iter != edges_end(); iter++) {
-      if (iter->data() == flag) remove_edge(iter);
+      if (iter->data() == flag) remove_edge(iter, false, false);
     }
     for (auto iter = vertices_begin(); iter != vertices_end(); iter++) {
       if (iter->is_isolated() && iter->data() == flag) remove_isolated_vertex(iter);
@@ -112,7 +112,7 @@ public:
   }
   void remove_without_flag(int flag) {
     for (auto iter = edges_begin(); iter != edges_end(); iter++) {
-      if (iter->data() != flag) remove_edge(iter);
+      if (iter->data() != flag) remove_edge(iter, false, false);
     }
     for (auto iter = vertices_begin(); iter != vertices_end(); iter++) {
       if (iter->is_isolated() && iter->data() != flag) remove_isolated_vertex(iter);

@@ -20,6 +20,8 @@
 #' @export
 #' @family polygons
 #' @family sets
+#' @seealso To get a complete overview of the boolean operations possible with
+#' polygon sets see the [dedicated help page on the topic][poly_bool]
 #'
 #' @examples
 #' # Polygon sets are created from polygons

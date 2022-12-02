@@ -37,6 +37,8 @@
 #' @export
 #' @importFrom euclid point is_exact_numeric
 #' @family polygons
+#' @seealso To get a complete overview of the boolean operations possible with
+#' polygons see the [dedicated help page on the topic][poly_bool]
 #'
 #' @examples
 #' points <- euclid::point(

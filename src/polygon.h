@@ -107,7 +107,7 @@ public:
     return res;
   }
 
-  cpp11::writable::logicals has_boundary() const {
+  cpp11::writable::logicals is_unbounded() const {
     cpp11::writable::logicals res;
     for (size_t i = 0; i < size(); ++i) {
       if (_storage[i].is_na()) {

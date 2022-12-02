@@ -66,11 +66,11 @@ n_holes <- function(x) {
 }
 #' @rdname polygon_rings
 #' @export
-is_bounded <- function(x) {
+is_unbounded <- function(x) {
   if (!is_polygon(x)) {
     abort("`x` must be a polygon")
   }
-  polygon_has_boundary(get_ptr(x))
+  polygon_is_unbounded(get_ptr(x))
 }
 #' @rdname polygon_rings
 #' @export
