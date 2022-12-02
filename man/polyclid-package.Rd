@@ -6,6 +6,8 @@
 \alias{polyclid-package}
 \title{polyclid: Polygon and Polyline Support for Euclid}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provides a polygon and polyline vector type for the 'euclid' ecosystem, along with several algorithms specific to these geometry types.
 }
 \seealso{

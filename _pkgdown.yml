@@ -1,0 +1,27 @@
+destination: docs
+url: https://polyclid.r-euclid.com
+
+authors:
+  Thomas Lin Pedersen:
+    href: https://data-imaginist.com
+
+home:
+  title: >
+    polyclid: Polygon and polyline for euclid
+  description: >
+    polyclid extents the euclid ecosystem with fundamental support for polygons
+    and polylines. It provide various types for handling such data along with
+    basic algorithms for them, notably full support for 2D boolean operations on
+    them.
+
+template:
+  params:
+    bootswatch: cosmo
+  opengraph:
+    image:
+      src: man/figures/card.png
+      alt: "polyclid: Polygon and polyline for euclid"
+    twitter:
+      creator: "@thomasp85"
+      site: "@rstudio"
+      card: summary_large_image

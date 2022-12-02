@@ -6,3 +6,6 @@
 ^codecov\.yml$
 ^\.github$
 configure.log
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
