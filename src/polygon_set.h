@@ -78,14 +78,18 @@ public:
 
     for (size_t j = 0; j < size(); ++j) {
       Polygon_set p = _storage[j];
-      if (p.is_na() || i[j % i.size()] >= p.number_of_polygons_with_holes()) {
+      int ii = i[j % i.size()];
+      if (p.is_na()) {
         res.push_back(Polygon::NA_value());
         continue;
       }
       std::vector<Polygon> polygons;
-      polygons.reserve(p.number_of_polygons_with_holes());
       p.polygons_with_holes(std::back_inserter(polygons));
-      res.push_back(polygons[i[j % polygons.size()]]);
+      if (ii >= polygons.size()) {
+        res.push_back(Polygon::NA_value());
+        continue;
+      }
+      res.push_back(polygons[ii]);
     }
 
     for (auto iter = res.begin(); iter != res.end(); iter++) {
