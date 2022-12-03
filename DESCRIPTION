@@ -31,7 +31,8 @@ Imports:
     utils,
     rlang
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/thomasp85/polyclid
+URL: https://github.com/thomasp85/polyclid,
+    http://polyclid.r-euclid.com/
 BugReports: https://github.com/thomasp85/polyclid/issues
 Remotes: 
     dickoa/cgalh,
