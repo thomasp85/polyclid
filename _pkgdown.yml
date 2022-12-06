@@ -16,7 +16,14 @@ home:
 
 template:
   bootstrap: 5
-  bootswatch: cosmo
+  theme: a11y-light
+  bslib:
+    bg: "#F7FAF4"
+    fg: "#0B0B0B"
+    primary: "#23507F"
+    base_font: {google: "Gelasio"}
+    heading_font: {google: "Montserrat"}
+    code_font: {google: "Fira Code"}
   opengraph:
     image:
       src: man/figures/card.png
@@ -27,6 +34,8 @@ template:
       card: summary_large_image
 
 navbar:
+  bg: primary
+  type: dark
   structure:
     left:
     - intro
@@ -45,7 +54,6 @@ navbar:
       text: Euclid ecosystem
       menu:
       - text: Foundation
-      - text: -------
       - text: Euclid
         href: https://r-euclid.com
       - text: Polyclid
