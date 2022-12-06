@@ -56,7 +56,9 @@ version allows equality as well, i.e. <code>f(x) &gt;= f(x + 1) || f(x) &lt;= f(
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_monotone</span><span class="op">(</span><span class="va">x</span>, dim <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">is_weakly_monotone</span><span class="op">(</span><span class="va">x</span>, dim <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">is_weakly_monotone</span><span class="op">(</span><span class="va">x</span>, dim <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_selfintersecting</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,6 +79,12 @@ monotonicity in</p></dd>
 <p>A logical vector with the same length as <code>x</code></p>
 
 
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>If a polyline is not at least weakly monotone in one dimension there is a
+chance that it intersects with itself. This can be queried by
+<code>is_selfintersecting()</code>.</p>
     </div>
 
     <div id="ref-examples">

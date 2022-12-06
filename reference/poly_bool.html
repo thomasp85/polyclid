@@ -69,37 +69,37 @@ euclid geometries that can be considered polygons: circles, triangles and iso
 rectangles), the output is always a <a href="polygon_set.html">polygon_set</a>, even if the result is a
 single polygon. This is done both to ensure a known output type, but also
 because polygon sets are the internal representation used during boolean
-operations and returning the native representation is thus more performant.</p><ul><li><p><code><a href="https://rdrr.io/r/base/sets.html" class="external-link">union()</a></code> will combine two polygons into one (if they touch or overlaps) or
+operations and returning the native representation is thus more performant.</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union()</a></code> will combine two polygons into one (if they touch or overlaps) or
 insert them into the same set if they are disjoint.</p></li>
-<li><p><code>intersection()</code> will return the area where the two inputs are interior
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection()</a></code> will return the area where the two inputs are interior
 joint (overlapping).</p></li>
-<li><p><code>difference()</code> will remove the overlapping areas from the polygon(s) first
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference()</a></code> will remove the overlapping areas from the polygon(s) first
 given in the first argument.</p></li>
-<li><p><code>symmetric_difference()</code> will return the areas of the inputs that are not
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference()</a></code> will return the areas of the inputs that are not
 overlapping.</p></li>
-<li><p><code>complement()</code> returns the inverse of the input, i.e. the areas that were
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">complement()</a></code> returns the inverse of the input, i.e. the areas that were
 outside of the input polygon(s) will be inside the returned polygon.</p></li>
 </ul><p>If only one argument is given, the cumulative operation is performed on the
-input. For <code><a href="https://rdrr.io/r/base/sets.html" class="external-link">union()</a></code> and <code>intersection()</code> this can be done in a single
-aggregate operation whereas for <code>difference()</code> and <code>symmetric_difference()</code>
+input. For <code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union()</a></code> and <code><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection()</a></code> this can be done in a single
+aggregate operation whereas for <code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference()</a></code> and <code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference()</a></code>
 are done one at a time.</p>
     </div>
     <div id="operations-between-polylines">
     <h2>Operations between polylines</h2>
     <p>Boolean set operations between polylines and/or polyline sets (or segments)
 will always return polyline sets. These sets can be a mix of polylines and
-isolated vertices depending on the input.</p><ul><li><p><code><a href="https://rdrr.io/r/base/sets.html" class="external-link">union()</a></code> will combine the polylines into a single set. Lines that are
+isolated vertices depending on the input.</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union()</a></code> will combine the polylines into a single set. Lines that are
 meeting at their end points will not be merged, but can be extracted with
 <code>as_polyline(..., simplify = TRUE)</code>. The reason for this is that merging
 these lines eagerly is bad for performance and will not alter the topology
 of the set. Further, the set already splits polylines into x monotone parts
 so there is not a 1-to-1 relationship between polylines and polyline sets
 either way.</p></li>
-<li><p><code>intersection()</code> will return the points where the inputs are crossing along
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection()</a></code> will return the points where the inputs are crossing along
 with the line segments where they are overlapping.</p></li>
-<li><p><code>difference()</code> will insert vertices in the first polyline (set) where the
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference()</a></code> will insert vertices in the first polyline (set) where the
 inputs are crossing and remove line segments that overlap.</p></li>
-<li><p><code>symmetric_difference()</code> will return those parts from either input that do
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference()</a></code> will return those parts from either input that do
 not overlap</p></li>
 </ul><p>contrary to polygons, there is not a single argument version for polylines,
 mainly because the need is not really there.</p>
@@ -110,16 +110,16 @@ mainly because the need is not really there.</p>
 what should happen is unclear. The following definitions are therefore mainly
 what makes sense in the context of this package. The return value is always a
 polyline set, but depending on the operation, it may be the faces of this set
-that has interpretational relevance.</p><ul><li><p><code><a href="https://rdrr.io/r/base/sets.html" class="external-link">union()</a></code> will combine the polylines and polygons into a single set. Where
+that has interpretational relevance.</p><ul><li><p><code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union()</a></code> will combine the polylines and polygons into a single set. Where
 they overlap the polyline interior to the polygon will be removed as it's
 point set is covered by that of the polygon</p></li>
-<li><p><code>intersection()</code> will return the polyline part that lies inside the polygon
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection()</a></code> will return the polyline part that lies inside the polygon
 as that represent the shared point set.</p></li>
-<li><p><code>difference()</code> if the polyline (set) is the first argument then the parts
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference()</a></code> if the polyline (set) is the first argument then the parts
 overlapping the polygon will be removed. If the polygon (set) is the first
 argument the polygon(s) will be cut by the into two or more by the
 polyline(s).</p></li>
-<li><p><code>symmetric_difference()</code> will return the polylines and polygons overlayed
+<li><p><code><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference()</a></code> will return the polylines and polygons overlayed
 into a single polygon set. For many this is what they assume the union to
 be.</p></li>
 </ul></div>
@@ -128,43 +128,43 @@ be.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Polygons</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">circ</span> <span class="op">&lt;-</span> <span class="fu"><a href="polygon.html">as_polygon</a></span><span class="op">(</span><span class="fu">circle</span><span class="op">(</span><span class="fu">euclid</span><span class="fu">::</span><span class="fu"><a href="https://r-euclid.com/reference/point.html" class="external-link">point</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">circ</span> <span class="op">&lt;-</span> <span class="fu"><a href="polygon.html">as_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/circle.html" class="external-link">circle</a></span><span class="op">(</span><span class="fu">euclid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/point.html" class="external-link">point</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">rect1</span> <span class="op">&lt;-</span> <span class="fu"><a href="polygon.html">polygon</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">1.5</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">rect2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="fu">euclid</span><span class="fu">::</span><span class="fu"><a href="https://r-euclid.com/reference/affine_transformation.html" class="external-link">affine_translate</a></span><span class="op">(</span><span class="fu">vec</span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rect2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="fu">euclid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/affine_transformation.html" class="external-link">affine_translate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/vec.html" class="external-link">vec</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Union of disjoint polygons places them in the same set</span></span></span>
-<span class="r-in"><span><span class="va">rects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">union</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="va">rect2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">rects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="va">rect2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rects</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Union of overlapping polygons</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">union</a></span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union</a></span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Intersection of disjoint polygons is empty</span></span></span>
-<span class="r-in"><span><span class="fu">intersection</span><span class="op">(</span><span class="va">rect1</span>, <span class="va">rect2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="va">rect2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;2D polyclid_polygon_sets [1]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] [empty]</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># For overlapping polygons it gives the overlap</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">intersection</span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection</a></span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Difference cuts out one polygon from the other</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">difference</span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference</a></span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">difference</span><span class="op">(</span><span class="va">circ</span>, <span class="va">rects</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference</a></span><span class="op">(</span><span class="va">circ</span>, <span class="va">rects</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># and symmetric difference gives the disjoint parts</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">symmetric_difference</span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference</a></span><span class="op">(</span><span class="va">rects</span>, <span class="va">circ</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># complement flippes it around, turning a bounded polygon into an unbounded</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">complement</span><span class="op">(</span><span class="va">rects</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">complement</a></span><span class="op">(</span><span class="va">rects</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Polylines</span></span></span>
@@ -183,64 +183,64 @@ be.</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Union combines the two polyline (sets) and splits up lines where they cross</span></span></span>
-<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">union</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">loop</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">loop</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">vert</span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Union will both return the isolated vertices of the cross points along with</span></span></span>
 <span class="r-in"><span><span class="co"># any overlapping segments</span></span></span>
-<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu">intersection</span><span class="op">(</span><span class="va">sine</span>, <span class="va">loop</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">loop</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">vert</span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu">intersection</span><span class="op">(</span><span class="va">line</span>, <span class="va">loop</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection</a></span><span class="op">(</span><span class="va">line</span>, <span class="va">loop</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">line</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="va">ps</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">vert</span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="polygon_set.html">vert_degree</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="va">ps</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="polygon_set.html">vert_degree</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Difference will cut lines at intersection points and remove overlapping</span></span></span>
 <span class="r-in"><span><span class="co"># segments from the first argument</span></span></span>
-<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu">difference</span><span class="op">(</span><span class="va">loop</span>, <span class="va">line</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference</a></span><span class="op">(</span><span class="va">loop</span>, <span class="va">line</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">vert</span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-11.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Symmetric difference will remove overlapping segments from the union</span></span></span>
-<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu">symmetric_difference</span><span class="op">(</span><span class="va">loop</span>, <span class="va">line</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference</a></span><span class="op">(</span><span class="va">loop</span>, <span class="va">line</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">vert</span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">ps</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-12.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Polygons and polylines</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Union merges the two, removing any segments of the polyline interior to the</span></span></span>
 <span class="r-in"><span><span class="co"># polygon</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">union</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union</a></span><span class="op">(</span><span class="va">sine</span>, <span class="va">circ</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-13.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Intersection returns the part of the polyline interior to the polygon</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rect1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="va">loop</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">euclid_plot</span><span class="op">(</span><span class="fu">intersection</span><span class="op">(</span><span class="va">loop</span>, <span class="va">rect1</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="va">loop</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_plot.html" class="external-link">euclid_plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/intersection.html" class="external-link">intersection</a></span><span class="op">(</span><span class="va">loop</span>, <span class="va">rect1</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-14.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Difference depends on whether the polygon or polyline is the first argument</span></span></span>
 <span class="r-in"><span><span class="co"># subtracting a polygon from a polyline removes the parts of the polyline</span></span></span>
 <span class="r-in"><span><span class="co"># interior to the polygon</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">difference</span><span class="op">(</span><span class="va">loop</span>, <span class="va">rect1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference</a></span><span class="op">(</span><span class="va">loop</span>, <span class="va">rect1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-15.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># subtracting a polyline from a polygon will cut the polygon along the lines</span></span></span>
 <span class="r-in"><span><span class="co"># where the polyline intersects it</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">difference</span><span class="op">(</span><span class="va">rect1</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">difference</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-16.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Symmetric difference is the union of the two difference results which is</span></span></span>
 <span class="r-in"><span><span class="co"># basically the overlay of the two topologies</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">symmetric_difference</span><span class="op">(</span><span class="va">rect1</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference</a></span><span class="op">(</span><span class="va">rect1</span>, <span class="va">loop</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="poly_bool-17.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

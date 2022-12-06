@@ -83,7 +83,6 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p><strong>WORK IN PROGRESS</strong></p>
 <p>polyclid extents the computational geometry framework provided by <a href="https://r-euclid.com" class="external-link">euclid</a> by providing base classes and algorithms for working with 2D polygons and polylines. The new classes provided by polyclid are:</p>
 <ul>
 <li><p><em>polyline:</em> A line consisting of several segments joined consecutively at their end points</p></li>
@@ -92,6 +91,7 @@
 <li><p><em>polygon_set:</em> Like above but for polygons. Boolean operations on polygons will create sets as the result may be disjoint areas</p></li>
 </ul>
 <p>As for algorithms, to the extent that it makes sense all methods provided by euclid has a counterpart in polyclid. Further, methods specific to polygons and polylines are provided such as 2D boolean set operations, polygon validation, etc.</p>
+<p>It is not intended that polyclid provides the full set of polygon-centric operations, rather this is the foundational package that other packages in the euclid ecosystem builds upon for more specialized algorithms.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -102,7 +102,59 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>TBD</p>
+<p>Polygons are areas in 2 dimensions, often bounded by an outer ring and possibly with holes. In polyclid it is not possible for a polygon to be disjoint, i.e. it cannot have islands outside the outer ring or inside the holes.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomasp85/polyclid" class="external-link">polyclid</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a polygon by specifying the x and y coordinates of the rings</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/polygon.html">polygon</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">0.25</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1.5</span>, <span class="fl">1.2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">1</span>, <span class="fl">0.5</span>, <span class="fl">1.25</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  hole_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">p</span></span>
+<span><span class="co">#&gt; &lt;2D polyclid_polygons [2]&gt;</span></span>
+<span><span class="co">#&gt; [1] [Boundary: 5, Range: &lt;&lt;-1, 0&gt;, &lt;2, 1.5&gt;&gt;, Holes: 1]    </span></span>
+<span><span class="co">#&gt; [2] [Boundary: 3, Range: &lt;&lt;-3, -1&gt;, &lt;1.2, 0.75&gt;&gt;, Holes: 0]</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>, <span class="st">"forestgreen"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<p>The polygon type works in much the same way as the base euclid types and responds to the same methods where appropriate:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/geometry_measures.html" class="external-link">approx_area</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3.625 1.400</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/euclid_geometry.html" class="external-link">cardinality</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 8 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;2D points [11]&gt;</span></span>
+<span><span class="co">#&gt;  [1] &lt;x:0, y:0&gt;      &lt;x:2, y:0&gt;      &lt;x:2, y:1.5&gt;    &lt;x:-1, y:1.5&gt;  </span></span>
+<span><span class="co">#&gt;  [5] &lt;x:-0.25, y:1&gt;  &lt;x:1, y:0.5&gt;    &lt;x:1, y:1.25&gt;   &lt;x:1.5, y:0.75&gt;</span></span>
+<span><span class="co">#&gt;  [9] &lt;x:1.2, y:0.75&gt; &lt;x:-1, y:0.5&gt;   &lt;x:-3, y:-1&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/location_predicates.html" class="external-link">has_inside</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/point.html" class="external-link">point</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  TRUE FALSE</span></span></code></pre></div>
+<p>But also have additional methods and predicates, e.g.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/polygon_topology.html">is_convex</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] FALSE  TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/polygon_rings.html">hole</a></span><span class="op">(</span><span class="va">p</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/circle.html" class="external-link">circle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/point.html" class="external-link">point</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.2</span><span class="op">)</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>, <span class="st">"forestgreen"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+<p>Of particular note are the full set of 2D boolean operations fully vectorised along two vectors of polygons, or as a cumulative operation along one vector</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p_symdif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/boolean_operations.html" class="external-link">symmetric_difference</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p_symdif</span>, col <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">circles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/euclid/man/circle.html" class="external-link">circle</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/euclid/man/point.html" class="external-link">point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">p_union</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">union</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">circles</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">p_union</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>, <span class="st">"forestgreen"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="100%"></p>
+<p>This is just a taster. Explore the vignette for an in-depth overview.</p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>

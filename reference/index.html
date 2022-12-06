@@ -44,49 +44,69 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
+          <h2 id="geometry-types">Geometry types <a href="#geometry-types" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>polyclid extents euclid by providing the following basic types that models polygons and polylines in 2 dimensions. The types are designed to resemble the basic geometries provided by euclid as much as possible and will respond to the same basic methods.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="is_monotone.html">is_monotone()</a></code> <code><a href="is_monotone.html">is_weakly_monotone()</a></code> </p>
-        </td>
-        <td><p>Polyline monotonicity</p></td>
-      </tr><tr><td>
-          <p><code><a href="is_valid.html">is_valid()</a></code> <code><a href="is_valid.html">make_valid()</a></code> </p>
-        </td>
-        <td><p>Polygon validity</p></td>
-      </tr><tr><td>
-          <p><code><a href="poly_bool.html">poly_bool</a></code> </p>
-        </td>
-        <td><p>Boolean set operations on polygons and polylines</p></td>
-      </tr><tr><td>
           <p><code><a href="polygon.html">polygon()</a></code> <code><a href="polygon.html">is_polygon()</a></code> <code><a href="polygon.html">as_polygon()</a></code> </p>
         </td>
         <td><p>Vector of polygons</p></td>
-      </tr><tr><td>
-          <p><code><a href="polygon_rings.html">n_holes()</a></code> <code><a href="polygon_rings.html">is_unbounded()</a></code> <code><a href="polygon_rings.html">boundary()</a></code> <code><a href="polygon_rings.html">`boundary&lt;-`()</a></code> <code><a href="polygon_rings.html">hole()</a></code> <code><a href="polygon_rings.html">`hole&lt;-`()</a></code> <code><a href="polygon_rings.html">connect_holes()</a></code> </p>
-        </td>
-        <td><p>Polygon rings</p></td>
       </tr><tr><td>
           <p><code><a href="polygon_set.html">polygon_set()</a></code> <code><a href="polygon_set.html">is_polygon_set()</a></code> <code><a href="polygon_set.html">as_polygon_set()</a></code> <code><a href="polygon_set.html">n_polygons()</a></code> <code><a href="polygon_set.html">locate_polygon()</a></code> <code><a href="polygon_set.html">n_faces()</a></code> <code><a href="polygon_set.html">vert_degree()</a></code> <code><a href="polygon_set.html">vert_neighbors()</a></code> <code><a href="polygon_set.html">polyline_verts()</a></code> </p>
         </td>
         <td><p>Sets of polygons</p></td>
       </tr><tr><td>
-          <p><code><a href="polygon_topology.html">is_convex()</a></code> <code><a href="polygon_topology.html">is_simple()</a></code> <code><a href="polygon_topology.html">is_relatively_simple()</a></code> </p>
-        </td>
-        <td><p>Polygon topology</p></td>
-      </tr><tr><td>
-          <p><code><a href="polyline.html">polyline()</a></code> <code><a href="polyline.html">is_polyline()</a></code> <code><a href="polyline.html">as_polyline()</a></code> <code><a href="polyline.html">is_selfintersecting()</a></code> </p>
+          <p><code><a href="polyline.html">polyline()</a></code> <code><a href="polyline.html">is_polyline()</a></code> <code><a href="polyline.html">as_polyline()</a></code> </p>
         </td>
         <td><p>Vector of polylines</p></td>
       </tr><tr><td>
           <p><code><a href="polyline_set.html">polyline_set()</a></code> <code><a href="polyline_set.html">is_polyline_set()</a></code> <code><a href="polyline_set.html">as_polyline_set()</a></code> <code><a href="polyline_set.html">n_polylines()</a></code> </p>
         </td>
         <td><p>Sets of polylines</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="boolean-operations">Boolean operations <a href="#boolean-operations" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>One of the major classes of functionality that polyclid provides are support for all boolean operations between polygons and polylines.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="poly_bool.html">poly_bool</a></code> </p>
+        </td>
+        <td><p>Boolean set operations on polygons and polylines</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="predicates">Predicates <a href="#predicates" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>polyclid provides a set of predicates about it’s types to inspect various properties of them</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="is_valid.html">is_valid()</a></code> <code><a href="is_valid.html">make_valid()</a></code> </p>
+        </td>
+        <td><p>Polygon validity</p></td>
+      </tr><tr><td>
+          <p><code><a href="polygon_topology.html">is_convex()</a></code> <code><a href="polygon_topology.html">is_simple()</a></code> <code><a href="polygon_topology.html">is_relatively_simple()</a></code> </p>
+        </td>
+        <td><p>Polygon topology</p></td>
+      </tr><tr><td>
+          <p><code><a href="is_monotone.html">is_monotone()</a></code> <code><a href="is_monotone.html">is_weakly_monotone()</a></code> <code><a href="is_monotone.html">is_selfintersecting()</a></code> </p>
+        </td>
+        <td><p>Polyline monotonicity</p></td>
       </tr><tr><td>
           <p><code><a href="reverse_orientation.html">reverse_orientation()</a></code> <code><a href="reverse_orientation.html">is_clockwise()</a></code> <code><a href="reverse_orientation.html">is_counterclockwise()</a></code> </p>
         </td>
         <td><p>Polygon orientation</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="manipulation-and-extraction">Manipulation and extraction <a href="#manipulation-and-extraction" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Apart from the basic <code><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">vert()</a></code>, and <code><a href="https://rdrr.io/pkg/euclid/man/subgeometries.html" class="external-link">edge()</a></code> polyclid provides a set of functions for extracting and manipulating the geometries it supports</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="polygon_rings.html">n_holes()</a></code> <code><a href="polygon_rings.html">is_unbounded()</a></code> <code><a href="polygon_rings.html">boundary()</a></code> <code><a href="polygon_rings.html">`boundary&lt;-`()</a></code> <code><a href="polygon_rings.html">hole()</a></code> <code><a href="polygon_rings.html">`hole&lt;-`()</a></code> <code><a href="polygon_rings.html">connect_holes()</a></code> </p>
+        </td>
+        <td><p>Polygon rings</p></td>
+      </tr><tr><td>
+          <p><code><a href="reverse_orientation.html">reverse_orientation()</a></code> <code><a href="reverse_orientation.html">is_clockwise()</a></code> <code><a href="reverse_orientation.html">is_counterclockwise()</a></code> </p>
+        </td>
+        <td><p>Polygon orientation</p></td>
+      </tr><tr><td>
+          <p><code><a href="connect_polylines.html">connect_polylines()</a></code> </p>
+        </td>
+        <td><p>Connect polylines together to a single line</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
