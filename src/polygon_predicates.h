@@ -20,7 +20,7 @@ inline int polygon_is_clockwise_impl(const Polygon& poly) {
   if (poly.is_na() || poly.outer_boundary().is_empty()) {
     return NA_LOGICAL;
   }
-  if ((poly.get_flag(VALIDITY_CHECKED) && !poly.get_flag(IS_VALID)) || !poly.outer_boundary().is_simple()) {
+  if (!((poly.get_flag(VALIDITY_CHECKED) && poly.get_flag(IS_VALID)) || poly.outer_boundary().is_simple())) {
     return NA_LOGICAL;
   }
   return poly.outer_boundary().is_clockwise_oriented();
@@ -30,7 +30,7 @@ inline int polygon_is_counterclockwise_impl(const Polygon& poly) {
   if (poly.is_na() || poly.outer_boundary().is_empty()) {
     return NA_LOGICAL;
   }
-  if ((poly.get_flag(VALIDITY_CHECKED) && !poly.get_flag(IS_VALID)) || !poly.outer_boundary().is_simple()) {
+  if (!((poly.get_flag(VALIDITY_CHECKED) && poly.get_flag(IS_VALID)) || poly.outer_boundary().is_simple())) {
     return NA_LOGICAL;
   }
   return poly.outer_boundary().is_counterclockwise_oriented();
@@ -86,7 +86,7 @@ inline int polygon_is_collinear_impl(const Polygon& poly) {
   if (poly.is_na() || poly.outer_boundary().is_empty()) {
     return NA_LOGICAL;
   }
-  if ((poly.get_flag(VALIDITY_CHECKED) && !poly.get_flag(IS_VALID)) || !poly.outer_boundary().is_simple()) {
+  if (!((poly.get_flag(VALIDITY_CHECKED) && poly.get_flag(IS_VALID)) || poly.outer_boundary().is_simple())) {
     return NA_LOGICAL;
   }
   return poly.outer_boundary().is_collinear_oriented();

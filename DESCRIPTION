@@ -38,4 +38,7 @@ Remotes:
     dickoa/cgalh,
     thomasp85/euclid
 Suggests: 
-    covr
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

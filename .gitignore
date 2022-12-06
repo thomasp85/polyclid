@@ -8,3 +8,4 @@ configure.log
 .httr-oauth
 .DS_Store
 docs
+inst/doc
