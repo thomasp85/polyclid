@@ -4,7 +4,6 @@
 \alias{polyline}
 \alias{is_polyline}
 \alias{as_polyline}
-\alias{is_selfintersecting}
 \title{Vector of polylines}
 \usage{
 polyline(..., id = NULL)
@@ -12,8 +11,6 @@ polyline(..., id = NULL)
 is_polyline(x)
 
 as_polyline(x, ...)
-
-is_selfintersecting(x)
 }
 \arguments{
 \item{...}{Various input for construction. See the \emph{Constructors} sections}

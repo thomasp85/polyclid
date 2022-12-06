@@ -24,13 +24,16 @@ inline int has_inside_impl(const T& geo, const Point_2& p) {
 }
 template<>
 inline int has_inside_impl<Polygon>(const Polygon& geo, const Point_2& p) {
-  if (geo.number_of_holes() != 0) {
-    cpp11::warning("Ignoring holes when checking location. Use `has_on_positive_side()` with a valid polygon to include them");
-  }
-  if ((geo.get_flag(VALIDITY_CHECKED) && geo.get_flag(IS_VALID)) || !geo.outer_boundary().is_simple()) {
+  if ((geo.get_flag(VALIDITY_CHECKED) && !geo.get_flag(IS_VALID)) || !geo.outer_boundary().is_simple()) {
     return NA_LOGICAL;
   }
-  return geo.outer_boundary().has_on_bounded_side(p);
+  bool is_inside = geo.is_unbounded() || geo.outer_boundary().has_on_bounded_side(p);
+  if (!is_inside) return 0;
+  for (auto hole = geo.holes_begin(); hole != geo.holes_end(); hole++) {
+    if (!hole->is_simple()) return NA_LOGICAL;
+    if (hole->has_on_bounded_side(p)) return 0;
+  }
+  return 1;
 }
 
 // has_on_impl -----------------------------------------------------------------

@@ -60,7 +60,7 @@ NULL
 #' @export
 n_holes <- function(x) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon")
+    cli_abort("{.arg x} must be a polygon")
   }
   polygon_n_holes(get_ptr(x))
 }
@@ -68,7 +68,7 @@ n_holes <- function(x) {
 #' @export
 is_unbounded <- function(x) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon")
+    cli_abort("{.arg x} must be a polygon")
   }
   polygon_is_unbounded(get_ptr(x))
 }
@@ -76,7 +76,7 @@ is_unbounded <- function(x) {
 #' @export
 boundary <- function(x) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon geometry")
+    cli_abort("{.arg x} must be a polygon geometry")
   }
   new_poly_vector(polygon_get_boundary(get_ptr(x)))
 }
@@ -84,7 +84,7 @@ boundary <- function(x) {
 #' @export
 `boundary<-` <- function(x, value) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon geometry")
+    cli_abort("{.arg x} must be a polygon")
   }
   value <- as_polygon(value)
   new_poly_vector(polygon_set_boundary(get_ptr(x), get_ptr(value)))
@@ -93,7 +93,7 @@ boundary <- function(x) {
 #' @export
 hole <- function(x, which) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon")
+    cli_abort("{.arg x} must be a polygon")
   }
   which <- rep_len(as.integer(which) - 1L, length(x))
   if (any(which > n_holes(x))) {
@@ -108,7 +108,7 @@ hole <- function(x, which) {
 #' @export
 `hole<-` <- function(x, which = NULL, value) {
   if (!is_polygon(x)) {
-    abort("`x` must be a polygon")
+    cli_abort("{.arg x} must be a polygon")
   }
   if (!is.null(which)) {
     which <- rep_len(as.integer(which) - 1L, length(x))

@@ -14,6 +14,7 @@ Provides a polygon and polyline vector type for the 'euclid' ecosystem, along wi
 Useful links:
 \itemize{
   \item \url{https://github.com/thomasp85/polyclid}
+  \item \url{http://polyclid.r-euclid.com/}
   \item Report bugs at \url{https://github.com/thomasp85/polyclid/issues}
 }
 

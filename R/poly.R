@@ -86,14 +86,14 @@ dim.polyclid_geometry <- function(x) {
 #' @export
 `[[.polyclid_geometry` <- function(x, i) {
   if (length(i) != 1) {
-    abort("attempt to select more than one element in vector")
+    cli_abort("attempt to select more than one element in vector")
   }
   x[i]
 }
 #' @export
 `[<-.polyclid_geometry` <- function(x, i, j, ..., value) {
   if (!is_poly_geom(value)) {
-    abort("Only geometries can be assigned to geometry vectors")
+    cli_abort("Only geometries can be assigned to geometry vectors")
   }
   if (is.numeric(i) && all(i >= 0)) {
     index <- seq_len(max(i))[i]
@@ -104,7 +104,7 @@ dim.polyclid_geometry <- function(x) {
     return(x)
   }
   if (anyNA(index)) {
-    abort("Trying to assign to non-existing element")
+    cli_abort("Trying to assign to non-existing element")
   }
   value <- rep_len(value, length(index))
   restore_poly_vector(poly_assign(get_ptr(x), index, get_ptr(value)), x)
@@ -112,24 +112,24 @@ dim.polyclid_geometry <- function(x) {
 #' @export
 `[[<-.polyclid_geometry` <- function(x, i, value) {
   if (length(i) != 1) {
-    abort("attempt to assign to more than one element in vector")
+    cli_abort("attempt to assign to more than one element in vector")
   }
   x[i] <- value
   x
 }
 #' @export
 `$.polyclid_geometry` <- function(x, name) {
-  abort("`$` is not defined for geometries")
+  cli_abort("{.code $} is not defined for geometries")
 }
 #' @export
 `$<-.polyclid_geometry` <- function(x, name, value) {
-  abort("`$<-` is not defined for geometries")
+  cli_abort("{.code $<-} is not defined for geometries")
 }
 #' @export
 c.polyclid_geometry <- function(..., recursive = FALSE) {
   input <- list(...)
   if (any(!vapply(input, inherits, logical(1), class(input[[1]])[1]))) {
-    abort("Geometries can only be combined with other geometries of the same type")
+    cli_abort("Geometries can only be combined with other geometries of the same type")
   }
   input <- lapply(input, get_ptr)
   res <- poly_combine(input[[1]], input[-1])

@@ -80,12 +80,3 @@ as_polyline <- function(x, ...) {
 as_polyline.euclid_segment2 <- function(x, ...) {
   new_poly_vector(create_polyline_segment(x))
 }
-
-#' @rdname polyline
-#' @export
-is_selfintersecting <- function(x) {
-  if (!is_polyline(x)) {
-    cli_abort("{.arg x} must be a polyline geometry")
-  }
-  polyline_is_selfintersecting(get_ptr(x))
-}

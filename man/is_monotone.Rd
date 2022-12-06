@@ -3,11 +3,14 @@
 \name{is_monotone}
 \alias{is_monotone}
 \alias{is_weakly_monotone}
+\alias{is_selfintersecting}
 \title{Polyline monotonicity}
 \usage{
 is_monotone(x, dim = "both")
 
 is_weakly_monotone(x, dim = "x")
+
+is_selfintersecting(x)
 }
 \arguments{
 \item{x}{A \code{polyclid_polyline} vector}
@@ -22,6 +25,11 @@ A logical vector with the same length as \code{x}
 Monotonicity describes the property that values along a line is ever
 increasing or decreasing, i.e. \code{f(x) > f(x + 1) || f(x) < f(x + 1)}. The weak
 version allows equality as well, i.e. \code{f(x) >= f(x + 1) || f(x) <= f(x + 1)}.
+}
+\details{
+If a polyline is not at least weakly monotone in one dimension there is a
+chance that it intersects with itself. This can be queried by
+\code{is_selfintersecting()}.
 }
 \examples{
 sine <- polyline(

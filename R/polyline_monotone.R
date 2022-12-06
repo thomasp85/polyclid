@@ -4,6 +4,10 @@
 #' increasing or decreasing, i.e. `f(x) > f(x + 1) || f(x) < f(x + 1)`. The weak
 #' version allows equality as well, i.e. `f(x) >= f(x + 1) || f(x) <= f(x + 1)`.
 #'
+#' If a polyline is not at least weakly monotone in one dimension there is a
+#' chance that it intersects with itself. This can be queried by
+#' `is_selfintersecting()`.
+#'
 #' @param x A `polyclid_polyline` vector
 #' @param dim Either `"x"` or `"y"` to indicate in which dimension to test
 #' monotonicity in
@@ -51,4 +55,13 @@ is_weakly_monotone <- function(x, dim = "x") {
     y = polyline_is_y_weakly_monotone(get_ptr(x)),
     cli_abort("{.arg dim} must be either {.val x} or {.val y}")
   )
+}
+
+#' @rdname is_monotone
+#' @export
+is_selfintersecting <- function(x) {
+  if (!is_polyline(x)) {
+    cli_abort("{.arg x} must be a polyline geometry")
+  }
+  polyline_is_selfintersecting(get_ptr(x))
 }

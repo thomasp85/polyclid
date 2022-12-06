@@ -6,10 +6,8 @@
 template<typename IT>
 double path_length(IT start, IT end) {
   double len = 0;
-  double last = 0;
   for (IT it = start; it != end; it++) {
-    last = CGAL::sqrt(CGAL::to_double(it->squared_length().exact()));
-    len += last;
+    len += CGAL::sqrt(CGAL::to_double(it->squared_length().exact()));
   }
   return len;
 }
