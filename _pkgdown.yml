@@ -25,3 +25,39 @@ template:
       creator: "@thomasp85"
       site: "@rstudio"
       card: summary_large_image
+
+reference:
+- title: Geometry types
+  desc: >
+    polyclid extents euclid by providing the following basic types that models
+    polygons and polylines in 2 dimensions. The types are designed to resemble
+    the basic geometries provided by euclid as much as possible and will respond
+    to the same basic methods.
+  contents:
+  - polygon
+  - polygon_set
+  - polyline
+  - polyline_set
+- title: Boolean operations
+  desc: >
+    One of the major classes of functionality that polyclid provides are support
+    for all boolean operations between polygons and polylines.
+  contents:
+  - poly_bool
+- title: Predicates
+  desc: >
+    polyclid provides a set of predicates about it's types to inspect various
+    properties of them
+  contents:
+  - is_valid
+  - is_simple
+  - is_monotone
+  - is_clockwise
+- title: Manipulation and extraction
+  desc: >
+    Apart from the basic `vert()`, and `edge()` polyclid provides a set of
+    functions for extracting and manipulating the geometries it supports
+  contents:
+  - boundary
+  - reverse_orientation
+  - connect_polylines

@@ -52,3 +52,14 @@ polyline_p create_polyline_segment(SEXP segments) {
   polyline *result(new polyline(vec));
   return {result};
 }
+
+[[cpp11::register]]
+polyline_p polyline_glue(cpp11::list_of<polyline_p> polylines, bool na_rm) {
+  std::vector<Polyline> vec;
+  vec.reserve(polylines.size());
+  for (R_xlen_t i = 0; i < polylines.size(); ++i) {
+    vec.push_back(polylines[i]->glue(na_rm));
+  }
+  polyline *result(new polyline(vec));
+  return {result};
+}

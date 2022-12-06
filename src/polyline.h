@@ -109,6 +109,21 @@ public:
     }
     return res;
   }
+  Polyline glue(bool na_rm) const {
+    if (!na_rm && any_na()) return Polyline::NA_value();
+
+    std::vector<Point_2> verts;
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na() || _storage[i].is_empty()) continue;
+
+      auto begin = _storage[i].vertices_begin();
+      auto end = _storage[i].vertices_end();
+      if (begin == end) continue;
+      if (verts.size() != 0 && verts.back() == *begin) begin++;
+      verts.insert(verts.end(), begin, end);
+    }
+    return {verts.begin(), verts.end()};
+  }
 };
 
 typedef cpp11::external_pointer<polyline> polyline_p;

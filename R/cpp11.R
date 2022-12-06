@@ -439,3 +439,7 @@ create_polyline_list <- function(ps) {
 create_polyline_segment <- function(segments) {
   .Call(`_polyclid_create_polyline_segment`, segments)
 }
+
+polyline_glue <- function(polylines, na_rm) {
+  .Call(`_polyclid_polyline_glue`, polylines, na_rm)
+}
