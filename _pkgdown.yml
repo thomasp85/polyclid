@@ -15,8 +15,8 @@ home:
     them.
 
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
+  bootswatch: cosmo
   opengraph:
     image:
       src: man/figures/card.png
@@ -25,6 +25,35 @@ template:
       creator: "@thomasp85"
       site: "@rstudio"
       card: summary_large_image
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - euclid
+    - github
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    euclid:
+      text: Euclid ecosystem
+      menu:
+      - text: Foundation
+      - text: -------
+      - text: Euclid
+        href: https://r-euclid.com
+      - text: Polyclid
+        href: https://polyclid.r-euclid.com
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/thomasp85/polyclid/
+      aria-label: github
 
 reference:
 - title: Geometry types
