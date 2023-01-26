@@ -1,18 +1,28 @@
 #pragma once
 
+#include <algorithm>
+
 #include <cpp11/R.hpp>
 #include "cgal_types.h"
 #include "polygon_predicates.h"
+#include "degenerate.h"
 
 #include <CGAL/Boolean_set_operations_2.h>
 #include <CGAL/connect_holes.h>
+
+inline Polyline remove_degenerate(const Polyline& pol) {
+  std::vector<Point_2> p_vec(pol.vertices_begin(), pol.vertices_end());
+  p_vec.erase(std::unique(p_vec.begin(), p_vec.end()), p_vec.end());
+  if (p_vec.front() == p_vec.back()) p_vec.pop_back();
+  return {p_vec.begin(), p_vec.end()};
+}
 
 inline Polygon polygon_make_valid_impl(Polygon& pol) {
   if (polygon_is_valid_impl(pol) || pol.is_na()) {
     return pol;
   }
   Polygon_set S;
-  Polyline p = pol.outer_boundary();
+  Polyline p = remove_degenerate(pol.outer_boundary());
   if (!p.is_empty()) {
     if (!polygon_is_relatively_simple_impl(p)) {
       return Polygon::NA_value();
@@ -24,14 +34,12 @@ inline Polygon polygon_make_valid_impl(Polygon& pol) {
   }
   for (auto iter = pol.holes_begin(); iter != pol.holes_end(); iter++) {
     if (iter->is_empty()) continue;
-    if (!polygon_is_relatively_simple_impl(*iter)) {
+    p = remove_degenerate(*iter);
+    if (!polygon_is_relatively_simple_impl(p)) {
       return Polygon::NA_value();
     }
-    if (iter->is_clockwise_oriented()) {
-      p = Polyline(*iter);
+    if (p.is_clockwise_oriented()) {
       p.reverse_orientation();
-    } else {
-      p = *iter;
     }
     S.difference(p);
   }
