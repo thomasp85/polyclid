@@ -23,6 +23,8 @@
 #include "set_definition.h"
 #include "point_predicates.h"
 #include "reverse_orientation.h"
+#include "centroid.h"
+#include "vert_insert.h"
 #include "degenerate.h"
 
 enum Primitive {
@@ -94,6 +96,8 @@ public:
   virtual cpp11::external_pointer<poly_vector_base> transform(const std::vector<Aff_transformation_2> affine) const = 0;
   virtual SEXP bbox() const = 0;
   virtual cpp11::external_pointer<poly_vector_base> reverse_orientation() const = 0;
+  virtual SEXP centroid() = 0;
+  virtual cpp11::external_pointer<poly_vector_base> insert_verts(const std::vector<Polyline>& verts, cpp11::integers at) const = 0;
 };
 typedef cpp11::external_pointer<poly_vector_base> poly_vector_base_p;
 
@@ -694,6 +698,34 @@ public:
         res.push_back(T::NA_value());
       } else {
         res.push_back(poly_reverse_orientation_impl(_storage[i]));
+      }
+    }
+    return create_poly_vector(res);
+  }
+
+  SEXP centroid() {
+    std::vector<Point_2> res;
+    res.reserve(size());
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na()) {
+        res.push_back(Point_2::NA_value());
+      } else {
+        res.push_back(centroid_impl(_storage[i]));
+      }
+    }
+    return euclid::create_point_2_vec(res);
+  }
+
+
+  poly_vector_base_p insert_verts(const std::vector<Polyline>& verts, cpp11::integers at) const {
+    std::vector<T> res;
+    res.reserve(size());
+
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na() || verts[i % verts.size()].is_na() || at[i % at.size()] == NA_INTEGER) {
+        res.push_back(T::NA_value());
+      } else {
+        res.push_back(vert_insert_impl(_storage[i], verts[i % verts.size()], at[i % at.size()]));
       }
     }
     return create_poly_vector(res);

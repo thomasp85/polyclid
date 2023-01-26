@@ -87,12 +87,12 @@ be.
 \examples{
 ## Polygons
 
-circ <- as_polygon(circle(euclid::point(0, 0), 1))
+circ <- as_polygon(circle(point(0, 0), 1))
 rect1 <- polygon(
   c(0.5, 1.5, 2.5, 1.5),
   c(0, -1, 0, 1)
 )
-rect2 <- transform(rect1, euclid::affine_translate(vec(-3, 0)))
+rect2 <- transform(rect1, affine_translate(vec(-3, 0)))
 
 # Union of disjoint polygons places them in the same set
 rects <- union(rect1, rect2)

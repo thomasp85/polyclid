@@ -1,0 +1,45 @@
+---
+title: "polyclid"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{polyclid}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(polyclid)
+```
+
+The polyclid package is an extension to euclid and provides rich types for working with polygons and polylines in 2 dimensions. The package serves as a foundation for other packages focusing on specific algorithms and problems in the same way that euclid does in a more general sense.
+
+That being said, it does provide one important class of algorithms, namely 2D boolean set operations. All major set operations are supported between any combination of polygons and polylines, all properly vectorised for maximum performance. As with everything build on top of euclid and CGAL (the underlying C++ library), all these operations are exact and not subjected to rounding errors or floating point imprecision.
+
+## Polygons
+
+Perhaps the most important type provided by polyclid is the polygon type. It represents a single joint point-set in 2D. In lay-mans term this means that it represents a single contiguous area. Polygons can have holes, but they cannot have any "islands", i.e. areas that are disjoint from the main polygon.
+
+Polygons can have a boundary, but can also be unbounded. If an unbounded polygon has no holes it encodes the full extent of the plane. By definition, the boundary of a polygon is always encoded in counterclockwise order and any hole is encoded in clockwise order. Both boundary and holes must not have any selfintersections. Further, holes must be fully enclosed by the boundary and at most overlap the boundary at its vertices. While it is possible to construct polygons that do not adhere to these requirements, many algorithms will not work on these. Due to the importance of the representation, polyclid provides both `is_valid()` and `make_valid()` to query validity and attempt to repair invalid polygons.
+
+```{r}
+poly <- polygon(
+  x = c(0, 1, 1, 0, -1, -1),
+  y = c(0, 0, 1, 0, 0, 1),
+  id = c(1, 1, 1, 2, 2, 2)
+)
+is_valid(poly)
+is_counterclockwise(poly)
+poly <- make_valid(poly)
+is_valid(poly)
+```
+
+```{r}
+plot(poly)
+```

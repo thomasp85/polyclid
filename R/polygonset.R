@@ -25,11 +25,8 @@
 #'
 #' @examples
 #' # Polygon sets are created from polygons
-#' rects <- as_polygon(euclid::iso_rect(
-#'   euclid::point(0:1, 0),
-#'   euclid::point(1:2, 1)
-#' ))
-#' circs <- as_polygon(euclid::circle(euclid::point(c(0, 2), 1), 0.3))
+#' rects <- as_polygon(iso_rect(point(0:1, 0), point(1:2, 1)))
+#' circs <- as_polygon(circle(point(c(0, 2), 1), 0.3))
 #'
 #' ps <- polygon_set(c(rects, circs))
 #' plot(ps, col = "grey")
@@ -51,13 +48,16 @@
 #' as_polygon(ps, which = 1)
 #'
 #' # Alternatively by specifying a point to locate the polygon to get
-#' locate_polygon(ps, euclid::point(2, 1))
+#' locate_polygon(ps, point(2, 1))
 #'
 #' # When using boolean operations on polygons (or polygon sets) the result is a
 #' # polygon set
 #' p_sym_dif <- symmetric_difference(rects, circs)
 #' plot(p_sym_dif, col = c("grey", "red"))
 polygon_set <- function(polygons) {
+  if (missing(polygons)) {
+    return(new_poly_vector(create_polygonset_empty()))
+  }
   if (is_bare_list(polygons)) {
     if (!all(vapply(polygons, is_polygon, logical(1)))) {
       cli_abort(c(

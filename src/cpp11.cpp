@@ -173,6 +173,20 @@ extern "C" SEXP _polyclid_poly_bbox(SEXP geometries) {
     return cpp11::as_sexp(poly_bbox(cpp11::as_cpp<cpp11::decay_t<poly_vector_base_p>>(geometries)));
   END_CPP11
 }
+// poly_common.cpp
+SEXP poly_centroid(poly_vector_base_p geometries);
+extern "C" SEXP _polyclid_poly_centroid(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(poly_centroid(cpp11::as_cpp<cpp11::decay_t<poly_vector_base_p>>(geometries)));
+  END_CPP11
+}
+// poly_common.cpp
+poly_vector_base_p poly_insert_vert(poly_vector_base_p geometries, polyline_p verts, cpp11::integers at);
+extern "C" SEXP _polyclid_poly_insert_vert(SEXP geometries, SEXP verts, SEXP at) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(poly_insert_vert(cpp11::as_cpp<cpp11::decay_t<poly_vector_base_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polyline_p>>(verts), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(at)));
+  END_CPP11
+}
 // poly_measures.cpp
 cpp11::writable::doubles poly_approx_length(poly_vector_base_p geometries);
 extern "C" SEXP _polyclid_poly_approx_length(SEXP geometries) {
@@ -334,6 +348,125 @@ extern "C" SEXP _polyclid_polyline_is_selfintersecting(SEXP poly) {
     return cpp11::as_sexp(polyline_is_selfintersecting(cpp11::as_cpp<cpp11::decay_t<polyline_p>>(poly)));
   END_CPP11
 }
+// polygon.cpp
+polygon_p create_polygon_empty();
+extern "C" SEXP _polyclid_create_polygon_empty() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygon_empty());
+  END_CPP11
+}
+// polygon.cpp
+polygon_p create_polygon_single(SEXP p);
+extern "C" SEXP _polyclid_create_polygon_single(SEXP p) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygon_single(cpp11::as_cpp<cpp11::decay_t<SEXP>>(p)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p create_polygon_list(cpp11::list ps);
+extern "C" SEXP _polyclid_create_polygon_list(SEXP ps) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygon_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(ps)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p create_polygon_list_list(cpp11::list pss);
+extern "C" SEXP _polyclid_create_polygon_list_list(SEXP pss) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygon_list_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(pss)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p create_polygon_triangle(SEXP triangles);
+extern "C" SEXP _polyclid_create_polygon_triangle(SEXP triangles) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(create_polygon_triangle(cpp11::as_cpp<cpp11::decay_t<SEXP>>(triangles)));
+  END_CPP11
+}
+// polygon.cpp
+cpp11::writable::integers polygon_sub_cardinality(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_sub_cardinality(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_sub_cardinality(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
+cpp11::writable::integers polygon_n_holes(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_n_holes(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_n_holes(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
+cpp11::writable::logicals polygon_is_unbounded(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_is_unbounded(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_is_unbounded(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_get_boundary(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_get_boundary(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_get_boundary(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_set_boundary(polygon_p geometries, polygon_p other);
+extern "C" SEXP _polyclid_polygon_set_boundary(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_set_boundary(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_get_hole(polygon_p geometries, cpp11::integers which);
+extern "C" SEXP _polyclid_polygon_get_hole(SEXP geometries, SEXP which) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_get_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_remove_hole(polygon_p geometries, cpp11::integers which);
+extern "C" SEXP _polyclid_polygon_remove_hole(SEXP geometries, SEXP which) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_remove_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_add_hole(polygon_p geometries, polygon_p other);
+extern "C" SEXP _polyclid_polygon_add_hole(SEXP geometries, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_add_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_set_hole(polygon_p geometries, cpp11::integers which, polygon_p other);
+extern "C" SEXP _polyclid_polygon_set_hole(SEXP geometries, SEXP which, SEXP other) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_set_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
+  END_CPP11
+}
+// polygon.cpp
+polygon_p polygon_get_rings(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_get_rings(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_get_rings(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
+// polygon.cpp
+poly_vector_base_p polygon_partition_convex(polygon_p geometries, bool optimal, bool triangulate);
+extern "C" SEXP _polyclid_polygon_partition_convex(SEXP geometries, SEXP optimal, SEXP triangulate) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_partition_convex(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<bool>>(optimal), cpp11::as_cpp<cpp11::decay_t<bool>>(triangulate)));
+  END_CPP11
+}
+// polygon.cpp
+poly_vector_base_p polygon_partition_monotone(polygon_p geometries);
+extern "C" SEXP _polyclid_polygon_partition_monotone(SEXP geometries) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(polygon_partition_monotone(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
+  END_CPP11
+}
 // polygon_set.cpp
 polygon_set_p create_polygonset_empty();
 extern "C" SEXP _polyclid_create_polygonset_empty() {
@@ -453,102 +586,39 @@ extern "C" SEXP _polyclid_polygonset_locate(SEXP geometries, SEXP points) {
     return cpp11::as_sexp(polygonset_locate(cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<SEXP>>(points)));
   END_CPP11
 }
-// polygon.cpp
-polygon_p create_polygon_empty();
-extern "C" SEXP _polyclid_create_polygon_empty() {
+// polyline.cpp
+polyline_p create_polyline_empty();
+extern "C" SEXP _polyclid_create_polyline_empty() {
   BEGIN_CPP11
-    return cpp11::as_sexp(create_polygon_empty());
+    return cpp11::as_sexp(create_polyline_empty());
   END_CPP11
 }
-// polygon.cpp
-polygon_p create_polygon_single(SEXP p);
-extern "C" SEXP _polyclid_create_polygon_single(SEXP p) {
+// polyline.cpp
+polyline_p create_polyline_single(SEXP p);
+extern "C" SEXP _polyclid_create_polyline_single(SEXP p) {
   BEGIN_CPP11
-    return cpp11::as_sexp(create_polygon_single(cpp11::as_cpp<cpp11::decay_t<SEXP>>(p)));
+    return cpp11::as_sexp(create_polyline_single(cpp11::as_cpp<cpp11::decay_t<SEXP>>(p)));
   END_CPP11
 }
-// polygon.cpp
-polygon_p create_polygon_list(cpp11::list ps);
-extern "C" SEXP _polyclid_create_polygon_list(SEXP ps) {
+// polyline.cpp
+polyline_p create_polyline_list(cpp11::list ps);
+extern "C" SEXP _polyclid_create_polyline_list(SEXP ps) {
   BEGIN_CPP11
-    return cpp11::as_sexp(create_polygon_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(ps)));
+    return cpp11::as_sexp(create_polyline_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(ps)));
   END_CPP11
 }
-// polygon.cpp
-polygon_p create_polygon_list_list(cpp11::list pss);
-extern "C" SEXP _polyclid_create_polygon_list_list(SEXP pss) {
+// polyline.cpp
+polyline_p create_polyline_segment(SEXP segments);
+extern "C" SEXP _polyclid_create_polyline_segment(SEXP segments) {
   BEGIN_CPP11
-    return cpp11::as_sexp(create_polygon_list_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(pss)));
+    return cpp11::as_sexp(create_polyline_segment(cpp11::as_cpp<cpp11::decay_t<SEXP>>(segments)));
   END_CPP11
 }
-// polygon.cpp
-polygon_p create_polygon_triangle(SEXP triangles);
-extern "C" SEXP _polyclid_create_polygon_triangle(SEXP triangles) {
+// polyline.cpp
+polyline_p polyline_glue(cpp11::list_of<polyline_p> polylines, bool na_rm);
+extern "C" SEXP _polyclid_polyline_glue(SEXP polylines, SEXP na_rm) {
   BEGIN_CPP11
-    return cpp11::as_sexp(create_polygon_triangle(cpp11::as_cpp<cpp11::decay_t<SEXP>>(triangles)));
-  END_CPP11
-}
-// polygon.cpp
-cpp11::writable::integers polygon_sub_cardinality(polygon_p geometries);
-extern "C" SEXP _polyclid_polygon_sub_cardinality(SEXP geometries) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_sub_cardinality(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
-  END_CPP11
-}
-// polygon.cpp
-cpp11::writable::integers polygon_n_holes(polygon_p geometries);
-extern "C" SEXP _polyclid_polygon_n_holes(SEXP geometries) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_n_holes(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
-  END_CPP11
-}
-// polygon.cpp
-cpp11::writable::logicals polygon_is_unbounded(polygon_p geometries);
-extern "C" SEXP _polyclid_polygon_is_unbounded(SEXP geometries) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_is_unbounded(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_get_boundary(polygon_p geometries);
-extern "C" SEXP _polyclid_polygon_get_boundary(SEXP geometries) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_get_boundary(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_set_boundary(polygon_p geometries, polygon_p other);
-extern "C" SEXP _polyclid_polygon_set_boundary(SEXP geometries, SEXP other) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_set_boundary(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_get_hole(polygon_p geometries, cpp11::integers which);
-extern "C" SEXP _polyclid_polygon_get_hole(SEXP geometries, SEXP which) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_get_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_remove_hole(polygon_p geometries, cpp11::integers which);
-extern "C" SEXP _polyclid_polygon_remove_hole(SEXP geometries, SEXP which) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_remove_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_add_hole(polygon_p geometries, polygon_p other);
-extern "C" SEXP _polyclid_polygon_add_hole(SEXP geometries, SEXP other) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_add_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
-  END_CPP11
-}
-// polygon.cpp
-polygon_p polygon_set_hole(polygon_p geometries, cpp11::integers which, polygon_p other);
-extern "C" SEXP _polyclid_polygon_set_hole(SEXP geometries, SEXP which, SEXP other) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polygon_set_hole(cpp11::as_cpp<cpp11::decay_t<polygon_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(which), cpp11::as_cpp<cpp11::decay_t<polygon_p>>(other)));
+    return cpp11::as_sexp(polyline_glue(cpp11::as_cpp<cpp11::decay_t<cpp11::list_of<polyline_p>>>(polylines), cpp11::as_cpp<cpp11::decay_t<bool>>(na_rm)));
   END_CPP11
 }
 // polyline_set.cpp
@@ -747,41 +817,6 @@ extern "C" SEXP _polyclid_polylineset_polygonset_symmetric_difference(SEXP geome
     return cpp11::as_sexp(polylineset_polygonset_symmetric_difference(cpp11::as_cpp<cpp11::decay_t<polyline_set_p>>(geometries), cpp11::as_cpp<cpp11::decay_t<polygon_set_p>>(other)));
   END_CPP11
 }
-// polyline.cpp
-polyline_p create_polyline_empty();
-extern "C" SEXP _polyclid_create_polyline_empty() {
-  BEGIN_CPP11
-    return cpp11::as_sexp(create_polyline_empty());
-  END_CPP11
-}
-// polyline.cpp
-polyline_p create_polyline_single(SEXP p);
-extern "C" SEXP _polyclid_create_polyline_single(SEXP p) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(create_polyline_single(cpp11::as_cpp<cpp11::decay_t<SEXP>>(p)));
-  END_CPP11
-}
-// polyline.cpp
-polyline_p create_polyline_list(cpp11::list ps);
-extern "C" SEXP _polyclid_create_polyline_list(SEXP ps) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(create_polyline_list(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(ps)));
-  END_CPP11
-}
-// polyline.cpp
-polyline_p create_polyline_segment(SEXP segments);
-extern "C" SEXP _polyclid_create_polyline_segment(SEXP segments) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(create_polyline_segment(cpp11::as_cpp<cpp11::decay_t<SEXP>>(segments)));
-  END_CPP11
-}
-// polyline.cpp
-polyline_p polyline_glue(cpp11::list_of<polyline_p> polylines, bool na_rm);
-extern "C" SEXP _polyclid_polyline_glue(SEXP polylines, SEXP na_rm) {
-  BEGIN_CPP11
-    return cpp11::as_sexp(polyline_glue(cpp11::as_cpp<cpp11::decay_t<cpp11::list_of<polyline_p>>>(polylines), cpp11::as_cpp<cpp11::decay_t<bool>>(na_rm)));
-  END_CPP11
-}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
@@ -807,6 +842,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_polyclid_poly_assign",                                 (DL_FUNC) &_polyclid_poly_assign,                                 3},
     {"_polyclid_poly_bbox",                                   (DL_FUNC) &_polyclid_poly_bbox,                                   1},
     {"_polyclid_poly_cardinality",                            (DL_FUNC) &_polyclid_poly_cardinality,                            1},
+    {"_polyclid_poly_centroid",                               (DL_FUNC) &_polyclid_poly_centroid,                               1},
     {"_polyclid_poly_combine",                                (DL_FUNC) &_polyclid_poly_combine,                                2},
     {"_polyclid_poly_copy",                                   (DL_FUNC) &_polyclid_poly_copy,                                   1},
     {"_polyclid_poly_definition",                             (DL_FUNC) &_polyclid_poly_definition,                             3},
@@ -819,6 +855,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_polyclid_poly_has_point_on_negative",                  (DL_FUNC) &_polyclid_poly_has_point_on_negative,                  2},
     {"_polyclid_poly_has_point_on_positive",                  (DL_FUNC) &_polyclid_poly_has_point_on_positive,                  2},
     {"_polyclid_poly_has_point_outside",                      (DL_FUNC) &_polyclid_poly_has_point_outside,                      2},
+    {"_polyclid_poly_insert_vert",                            (DL_FUNC) &_polyclid_poly_insert_vert,                            3},
     {"_polyclid_poly_is_degenerate",                          (DL_FUNC) &_polyclid_poly_is_degenerate,                          1},
     {"_polyclid_poly_is_equal",                               (DL_FUNC) &_polyclid_poly_is_equal,                               2},
     {"_polyclid_poly_is_na",                                  (DL_FUNC) &_polyclid_poly_is_na,                                  1},
@@ -837,6 +874,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_polyclid_polygon_connect_holes",                       (DL_FUNC) &_polyclid_polygon_connect_holes,                       1},
     {"_polyclid_polygon_get_boundary",                        (DL_FUNC) &_polyclid_polygon_get_boundary,                        1},
     {"_polyclid_polygon_get_hole",                            (DL_FUNC) &_polyclid_polygon_get_hole,                            2},
+    {"_polyclid_polygon_get_rings",                           (DL_FUNC) &_polyclid_polygon_get_rings,                           1},
     {"_polyclid_polygon_is_clockwise",                        (DL_FUNC) &_polyclid_polygon_is_clockwise,                        1},
     {"_polyclid_polygon_is_collinear",                        (DL_FUNC) &_polyclid_polygon_is_collinear,                        1},
     {"_polyclid_polygon_is_convex",                           (DL_FUNC) &_polyclid_polygon_is_convex,                           1},
@@ -847,6 +885,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_polyclid_polygon_is_valid",                            (DL_FUNC) &_polyclid_polygon_is_valid,                            1},
     {"_polyclid_polygon_make_valid",                          (DL_FUNC) &_polyclid_polygon_make_valid,                          1},
     {"_polyclid_polygon_n_holes",                             (DL_FUNC) &_polyclid_polygon_n_holes,                             1},
+    {"_polyclid_polygon_partition_convex",                    (DL_FUNC) &_polyclid_polygon_partition_convex,                    3},
+    {"_polyclid_polygon_partition_monotone",                  (DL_FUNC) &_polyclid_polygon_partition_monotone,                  1},
     {"_polyclid_polygon_remove_hole",                         (DL_FUNC) &_polyclid_polygon_remove_hole,                         2},
     {"_polyclid_polygon_set_boundary",                        (DL_FUNC) &_polyclid_polygon_set_boundary,                        2},
     {"_polyclid_polygon_set_hole",                            (DL_FUNC) &_polyclid_polygon_set_hole,                            3},

@@ -55,11 +55,8 @@ them).
 }
 \examples{
 # Polygon sets are created from polygons
-rects <- as_polygon(euclid::iso_rect(
-  euclid::point(0:1, 0),
-  euclid::point(1:2, 1)
-))
-circs <- as_polygon(euclid::circle(euclid::point(c(0, 2), 1), 0.3))
+rects <- as_polygon(iso_rect(point(0:1, 0), point(1:2, 1)))
+circs <- as_polygon(circle(point(c(0, 2), 1), 0.3))
 
 ps <- polygon_set(c(rects, circs))
 plot(ps, col = "grey")
@@ -81,7 +78,7 @@ as_polygon(ps)
 as_polygon(ps, which = 1)
 
 # Alternatively by specifying a point to locate the polygon to get
-locate_polygon(ps, euclid::point(2, 1))
+locate_polygon(ps, point(2, 1))
 
 # When using boolean operations on polygons (or polygon sets) the result is a
 # polygon set

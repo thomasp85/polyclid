@@ -90,6 +90,27 @@ public:
     auto pl = constructor(begin, end);
     CGAL::insert(*this, pl);
   }
+  template<typename Iter>
+  void insert_separate(Iter begin, Iter end) {
+    std::vector<Polyline_2::X_monotone_curve_2> curves;
+    auto constructor = this->traits()->construct_x_monotone_curve_2_object();
+    for (Iter iter = begin; iter != end; iter++) {
+      curves.push_back(constructor(iter, iter + 1));
+    }
+    CGAL::insert(*this, curves.begin(), curves.end());
+  }
+  void insert(const Segment_2& seg) {
+    Segment_2 seg_array[1] = {seg};
+    auto constructor = this->traits()->construct_x_monotone_curve_2_object();
+    auto pl = constructor(seg_array, seg_array + 1);
+    CGAL::insert(*this, pl);
+  }
+  void insert_non_overlapping(const Segment_2& seg) {
+    Segment_2 seg_array[1] = {seg};
+    auto constructor = this->traits()->construct_x_monotone_curve_2_object();
+    auto pl = constructor(seg_array, seg_array + 1);
+    CGAL::insert_non_intersecting_curve(*this, pl);
+  }
   void set_flag(int flag) {
     for (auto iter = halfedges_begin(); iter != halfedges_end(); iter++) {
       iter->set_data(flag);

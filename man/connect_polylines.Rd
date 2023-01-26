@@ -41,4 +41,5 @@ sine1 <- sine[1:10]
 sine2 <- sine[10:20]
 
 sine == connect_polylines(c(sine1, sine2))
+
 }

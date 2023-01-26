@@ -41,7 +41,7 @@
 #' polygons see the [dedicated help page on the topic][poly_bool]
 #'
 #' @examples
-#' points <- euclid::point(
+#' points <- point(
 #'   c(1, 0, -1, -0.5, 0.5),
 #'   c(0, 1, 0, -1, -1)
 #' )
@@ -67,14 +67,14 @@
 #' poly <- polygon(list(
 #'   list(
 #'     points,
-#'     euclid::point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))
+#'     point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))
 #'   )
 #' ))
 #' plot(poly, col = "grey")
 #'
 #' # or use hole_id to similar effect (same polygon as above)
 #' poly2 <- polygon(
-#'   c(points, euclid::point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))),
+#'   c(points, point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))),
 #'   hole_id = c(1, 1, 1, 1, 1, 2, 2, 2)
 #' )
 #' poly == poly2
@@ -94,6 +94,9 @@
 #'
 polygon <- function(..., id = NULL, hole_id = NULL) {
   args <- list(...)
+  if (length(args) == 0) {
+    return(new_poly_vector(create_polygon_empty()))
+  }
   points <- args[[1]]
   if (is_bare_list(points)) {
     holes <- !all(vapply(points, is_2d_point, logical(1)))

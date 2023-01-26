@@ -19,6 +19,8 @@
 #' @param x A `polyclid_polyline_set` vector
 #' @param simplify Should the extracted polylines be simplified by joining lines
 #' where possible
+#' @param ignore_inner Should inner faces (i.e. faces not adjacent to the
+#' unbounded face) be ignored
 #' @param ... Arguments passed on
 #'
 #' @return a `polyclid_polygon_set` vector
@@ -65,6 +67,9 @@
 #' polyline_verts(ps[2])
 #'
 polyline_set <- function(polylines) {
+  if (missing(polylines)) {
+    return(new_poly_vector(create_polylineset_empty()))
+  }
   if (is_bare_list(polylines)) {
     if (!all(vapply(polylines, is_polyline, logical(1)))) {
       cli_abort(c(

@@ -96,6 +96,14 @@ poly_bbox <- function(geometries) {
   .Call(`_polyclid_poly_bbox`, geometries)
 }
 
+poly_centroid <- function(geometries) {
+  .Call(`_polyclid_poly_centroid`, geometries)
+}
+
+poly_insert_vert <- function(geometries, verts, at) {
+  .Call(`_polyclid_poly_insert_vert`, geometries, verts, at)
+}
+
 poly_approx_length <- function(geometries) {
   .Call(`_polyclid_poly_approx_length`, geometries)
 }
@@ -188,6 +196,74 @@ polyline_is_selfintersecting <- function(poly) {
   .Call(`_polyclid_polyline_is_selfintersecting`, poly)
 }
 
+create_polygon_empty <- function() {
+  .Call(`_polyclid_create_polygon_empty`)
+}
+
+create_polygon_single <- function(p) {
+  .Call(`_polyclid_create_polygon_single`, p)
+}
+
+create_polygon_list <- function(ps) {
+  .Call(`_polyclid_create_polygon_list`, ps)
+}
+
+create_polygon_list_list <- function(pss) {
+  .Call(`_polyclid_create_polygon_list_list`, pss)
+}
+
+create_polygon_triangle <- function(triangles) {
+  .Call(`_polyclid_create_polygon_triangle`, triangles)
+}
+
+polygon_sub_cardinality <- function(geometries) {
+  .Call(`_polyclid_polygon_sub_cardinality`, geometries)
+}
+
+polygon_n_holes <- function(geometries) {
+  .Call(`_polyclid_polygon_n_holes`, geometries)
+}
+
+polygon_is_unbounded <- function(geometries) {
+  .Call(`_polyclid_polygon_is_unbounded`, geometries)
+}
+
+polygon_get_boundary <- function(geometries) {
+  .Call(`_polyclid_polygon_get_boundary`, geometries)
+}
+
+polygon_set_boundary <- function(geometries, other) {
+  .Call(`_polyclid_polygon_set_boundary`, geometries, other)
+}
+
+polygon_get_hole <- function(geometries, which) {
+  .Call(`_polyclid_polygon_get_hole`, geometries, which)
+}
+
+polygon_remove_hole <- function(geometries, which) {
+  .Call(`_polyclid_polygon_remove_hole`, geometries, which)
+}
+
+polygon_add_hole <- function(geometries, other) {
+  .Call(`_polyclid_polygon_add_hole`, geometries, other)
+}
+
+polygon_set_hole <- function(geometries, which, other) {
+  .Call(`_polyclid_polygon_set_hole`, geometries, which, other)
+}
+
+polygon_get_rings <- function(geometries) {
+  .Call(`_polyclid_polygon_get_rings`, geometries)
+}
+
+polygon_partition_convex <- function(geometries, optimal, triangulate) {
+  .Call(`_polyclid_polygon_partition_convex`, geometries, optimal, triangulate)
+}
+
+polygon_partition_monotone <- function(geometries) {
+  .Call(`_polyclid_polygon_partition_monotone`, geometries)
+}
+
 create_polygonset_empty <- function() {
   .Call(`_polyclid_create_polygonset_empty`)
 }
@@ -256,60 +332,24 @@ polygonset_locate <- function(geometries, points) {
   .Call(`_polyclid_polygonset_locate`, geometries, points)
 }
 
-create_polygon_empty <- function() {
-  .Call(`_polyclid_create_polygon_empty`)
+create_polyline_empty <- function() {
+  .Call(`_polyclid_create_polyline_empty`)
 }
 
-create_polygon_single <- function(p) {
-  .Call(`_polyclid_create_polygon_single`, p)
+create_polyline_single <- function(p) {
+  .Call(`_polyclid_create_polyline_single`, p)
 }
 
-create_polygon_list <- function(ps) {
-  .Call(`_polyclid_create_polygon_list`, ps)
+create_polyline_list <- function(ps) {
+  .Call(`_polyclid_create_polyline_list`, ps)
 }
 
-create_polygon_list_list <- function(pss) {
-  .Call(`_polyclid_create_polygon_list_list`, pss)
+create_polyline_segment <- function(segments) {
+  .Call(`_polyclid_create_polyline_segment`, segments)
 }
 
-create_polygon_triangle <- function(triangles) {
-  .Call(`_polyclid_create_polygon_triangle`, triangles)
-}
-
-polygon_sub_cardinality <- function(geometries) {
-  .Call(`_polyclid_polygon_sub_cardinality`, geometries)
-}
-
-polygon_n_holes <- function(geometries) {
-  .Call(`_polyclid_polygon_n_holes`, geometries)
-}
-
-polygon_is_unbounded <- function(geometries) {
-  .Call(`_polyclid_polygon_is_unbounded`, geometries)
-}
-
-polygon_get_boundary <- function(geometries) {
-  .Call(`_polyclid_polygon_get_boundary`, geometries)
-}
-
-polygon_set_boundary <- function(geometries, other) {
-  .Call(`_polyclid_polygon_set_boundary`, geometries, other)
-}
-
-polygon_get_hole <- function(geometries, which) {
-  .Call(`_polyclid_polygon_get_hole`, geometries, which)
-}
-
-polygon_remove_hole <- function(geometries, which) {
-  .Call(`_polyclid_polygon_remove_hole`, geometries, which)
-}
-
-polygon_add_hole <- function(geometries, other) {
-  .Call(`_polyclid_polygon_add_hole`, geometries, other)
-}
-
-polygon_set_hole <- function(geometries, which, other) {
-  .Call(`_polyclid_polygon_set_hole`, geometries, which, other)
+polyline_glue <- function(polylines, na_rm) {
+  .Call(`_polyclid_polyline_glue`, polylines, na_rm)
 }
 
 create_polylineset_empty <- function() {
@@ -422,24 +462,4 @@ polygonset_polylineset_difference <- function(geometries, other) {
 
 polylineset_polygonset_symmetric_difference <- function(geometries, other) {
   .Call(`_polyclid_polylineset_polygonset_symmetric_difference`, geometries, other)
-}
-
-create_polyline_empty <- function() {
-  .Call(`_polyclid_create_polyline_empty`)
-}
-
-create_polyline_single <- function(p) {
-  .Call(`_polyclid_create_polyline_single`, p)
-}
-
-create_polyline_list <- function(ps) {
-  .Call(`_polyclid_create_polyline_list`, ps)
-}
-
-create_polyline_segment <- function(segments) {
-  .Call(`_polyclid_create_polyline_segment`, segments)
-}
-
-polyline_glue <- function(polylines, na_rm) {
-  .Call(`_polyclid_polyline_glue`, polylines, na_rm)
 }

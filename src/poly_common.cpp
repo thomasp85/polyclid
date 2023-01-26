@@ -1,4 +1,5 @@
 #include "poly_vector.h"
+#include "polyline.h"
 
 #include <cpp11/doubles.hpp>
 #include <cpp11/strings.hpp>
@@ -220,4 +221,20 @@ SEXP poly_bbox(poly_vector_base_p geometries) {
     cpp11::stop("Data structure pointer cleared from memory");
   }
   return geometries->bbox();
+}
+
+[[cpp11::register]]
+SEXP poly_centroid(poly_vector_base_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  return geometries->centroid();
+}
+
+[[cpp11::register]]
+poly_vector_base_p poly_insert_vert(poly_vector_base_p geometries, polyline_p verts, cpp11::integers at) {
+  if (geometries.get() == nullptr || verts.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  return geometries->insert_verts(verts->get_storage(), at);
 }

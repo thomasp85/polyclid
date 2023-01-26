@@ -43,6 +43,9 @@
 #'
 polyline <- function(..., id = NULL) {
   args <- list(...)
+  if (length(args) == 0) {
+    return(new_poly_vector(create_polyline_empty()))
+  }
   if (is_bare_list(args[[1]])) {
     points <- args[[1]]
     if (!all(vapply(points, is_2d_point, logical(1)))) {

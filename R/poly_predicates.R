@@ -7,6 +7,7 @@ is_degenerate.polyclid_geometry <- function(x) {
 #' @importFrom euclid has_on as_point
 #' @export
 has_on.polyclid_geometry <- function(x, y) {
+  if (is_polygon(x)) x <- polygon_set(x)
   poly_has_point_on(get_ptr(x), as_point(y))
 }
 
@@ -25,11 +26,13 @@ has_outside.polyclid_geometry <- function(x, y) {
 #' @importFrom euclid has_on_positive_side as_point
 #' @export
 has_on_positive_side.polyclid_geometry <- function(x, y) {
+  if (is_polygon(x)) x <- polygon_set(x)
   poly_has_point_on_positive(get_ptr(x), as_point(y))
 }
 
 #' @importFrom euclid has_on_negative_side as_point
 #' @export
 has_on_negative_side.polyclid_geometry <- function(x, y) {
+  if (is_polygon(x)) x <- polygon_set(x)
   poly_has_point_on_negative(get_ptr(x), as_point(y))
 }

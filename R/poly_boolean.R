@@ -80,12 +80,12 @@
 #' @examples
 #' ## Polygons
 #'
-#' circ <- as_polygon(circle(euclid::point(0, 0), 1))
+#' circ <- as_polygon(circle(point(0, 0), 1))
 #' rect1 <- polygon(
 #'   c(0.5, 1.5, 2.5, 1.5),
 #'   c(0, -1, 0, 1)
 #' )
-#' rect2 <- transform(rect1, euclid::affine_translate(vec(-3, 0)))
+#' rect2 <- transform(rect1, affine_translate(vec(-3, 0)))
 #'
 #' # Union of disjoint polygons places them in the same set
 #' rects <- union(rect1, rect2)
@@ -246,7 +246,7 @@ symmetric_difference.polyclid_polygon_set <- function(x, y, ...) {
 #' @export
 has_intersection.polyclid_polygon_set <- function(x, y, ...) {
   y <- as_polygon_set(y)
-  new_poly_vector(polygonset_do_intersect(get_ptr(x), get_ptr(y)))
+  polygonset_do_intersect(get_ptr(x), get_ptr(y))
 }
 
 ## Polygon
@@ -348,7 +348,7 @@ symmetric_difference.polyclid_polyline_set <- function(x, y, ...) {
 #' @export
 has_intersection.polyclid_polyline_set <- function(x, y, ...) {
   y <- as_polyline_set(y)
-  new_poly_vector(polygonset_do_intersect(get_ptr(x), get_ptr(y)))
+  polygonset_do_intersect(get_ptr(x), get_ptr(y))
 }
 
 ## Polyline

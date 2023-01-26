@@ -57,7 +57,7 @@ using the \code{as_polygon()} function.
 }
 
 \examples{
-points <- euclid::point(
+points <- point(
   c(1, 0, -1, -0.5, 0.5),
   c(0, 1, 0, -1, -1)
 )
@@ -83,14 +83,14 @@ plot(poly, col = "grey")
 poly <- polygon(list(
   list(
     points,
-    euclid::point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))
+    point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))
   )
 ))
 plot(poly, col = "grey")
 
 # or use hole_id to similar effect (same polygon as above)
 poly2 <- polygon(
-  c(points, euclid::point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))),
+  c(points, point(c(0, 0.5, -0.5), c(0.5, -0.5, -0.5))),
   hole_id = c(1, 1, 1, 1, 1, 2, 2, 2)
 )
 poly == poly2

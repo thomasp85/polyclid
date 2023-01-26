@@ -331,3 +331,11 @@ Ops.polyclid_geometry <- function(e1, e2) {
     cli_abort("The {.code {.Generic}} operator is not defined for {.cls polyclid_geometry} vectors")
   )
 }
+#' @importFrom euclid centroid
+#' @export
+centroid.polyclid_geometry <- function(x, ...) {
+  if (!is_polygon(x) && ! is_polyline(x)) {
+    cli_abort("{.arg x} must be a polygon or polyline vector")
+  }
+  poly_centroid(get_ptr(x))
+}

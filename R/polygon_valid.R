@@ -73,7 +73,7 @@
 #' is_valid(poly)
 #'
 #' # Holes must be completely contained and non-overlapping with the boundary
-#' h <- as_polygon(euclid::circle(euclid::point(8, 8), 15))
+#' h <- as_polygon(circle(point(8, 8), 15))
 #' plot(c(poly, h))
 #'
 #' hole(poly) <- h
