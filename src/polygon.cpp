@@ -179,3 +179,19 @@ polygon_p polygon_get_rings(polygon_p geometries) {
   polygon *result(new polygon(poly));
   return {result};
 }
+
+[[cpp11::register]]
+poly_vector_base_p polygon_partition_convex(polygon_p geometries, bool optimal, bool triangulate) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  return geometries->partition_convex(optimal, triangulate);
+}
+
+[[cpp11::register]]
+poly_vector_base_p polygon_partition_monotone(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  return geometries->partition_monotone();
+}

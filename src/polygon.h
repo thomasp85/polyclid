@@ -4,6 +4,7 @@
 #include "poly_vector.h"
 #include "polygon_predicates.h"
 #include "polygon_modification.h"
+#include "polygon_partition.h"
 
 class polygon : public poly_vector<Polygon> {
 public:
@@ -381,6 +382,32 @@ public:
         res.push_back(Polygon::NA_value());
       } else {
         res.push_back(polygon_connect_holes_impl(_storage[i]));
+      }
+    }
+    return create_poly_vector(res);
+  }
+  poly_vector_base_p partition_convex(bool optimal, bool triangulate) {
+    std::vector<Polyline_set> res;
+    res.reserve(size());
+
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na()) {
+        res.push_back(Polyline_set::NA_value());
+      } else {
+        res.push_back(convex_partition(_storage[i], optimal, triangulate));
+      }
+    }
+    return create_poly_vector(res);
+  }
+  poly_vector_base_p partition_monotone() {
+    std::vector<Polyline_set> res;
+    res.reserve(size());
+
+    for (size_t i = 0; i < size(); ++i) {
+      if (_storage[i].is_na()) {
+        res.push_back(Polyline_set::NA_value());
+      } else {
+        res.push_back(monotone_partition(_storage[i]));
       }
     }
     return create_poly_vector(res);
