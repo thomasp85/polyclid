@@ -234,7 +234,11 @@ public:
         pl->set_data(2);
         while (true) {
           pl->set_data(1);
-          points.insert(points.end(), pl->curve().points_begin(), pl->curve().points_end());
+          if (pl->source()->point() == *pl->curve().points_begin()) {
+            points.insert(points.end(), std::next(pl->curve().points_begin(), 1), pl->curve().points_end());
+          } else {
+            points.insert(points.end(), std::next(pl->curve().points_rbegin(), 1), pl->curve().points_rend());
+          }
           if (pl->target()->degree() != 2) break;
           pl = pl->next();
           if (pl->data() == 2) break;
@@ -271,7 +275,11 @@ public:
         pl->set_data(2);
         while (true) {
           pl->set_data(1);
-          points.insert(points.end(), pl->curve().points_begin(), pl->curve().points_end());
+          if (pl->source()->point() == *pl->curve().points_begin()) {
+            points.insert(points.end(), std::next(pl->curve().points_begin(), 1), pl->curve().points_end());
+          } else {
+            points.insert(points.end(), std::next(pl->curve().points_rbegin(), 1), pl->curve().points_rend());
+          }
           if (pl->target()->degree() != 2) break;
           pl = pl->next();
           if (pl->data() == 2) break;
@@ -356,11 +364,10 @@ public:
         if (outer != nullptr) {
           auto c_iter = outer;
           do {
-            auto curve = c_iter->curve();
-            auto end = curve.points_end();
-            end--;
-            for (auto p_iter = curve.points_begin(); p_iter != end; p_iter++) {
-              points.push_back(*p_iter);
+            if (c_iter->source()->point() == *c_iter->curve().points_begin()) {
+              points.insert(points.end(), std::next(c_iter->curve().points_begin(), 1), c_iter->curve().points_end());
+            } else {
+              points.insert(points.end(), std::next(c_iter->curve().points_rbegin(), 1), c_iter->curve().points_rend());
             }
           } while (++c_iter != outer);
         }
@@ -373,11 +380,10 @@ public:
               points.clear();
               auto i_iter = inner;
               do {
-                auto curve = i_iter->curve();
-                auto end = curve.points_end();
-                end--;
-                for (auto p_iter = curve.points_begin(); p_iter != end; p_iter++) {
-                  points.push_back(*p_iter);
+                if (i_iter->source()->point() == *i_iter->curve().points_begin()) {
+                  points.insert(points.end(), std::next(i_iter->curve().points_begin(), 1), i_iter->curve().points_end());
+                } else {
+                  points.insert(points.end(), std::next(i_iter->curve().points_rbegin(), 1), i_iter->curve().points_rend());
                 }
               } while (++i_iter != inner);
               Polyline hole(points.begin(), points.end());
