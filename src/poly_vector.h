@@ -23,6 +23,7 @@
 #include "set_definition.h"
 #include "point_predicates.h"
 #include "reverse_orientation.h"
+#include "degenerate.h"
 
 enum Primitive {
   VIRTUAL,
@@ -527,7 +528,7 @@ public:
         result.push_back(NA_LOGICAL);
         continue;
       }
-      result.push_back((Rboolean) _storage[i].is_na());
+      result.push_back((Rboolean) poly_is_degenerate_impl(_storage[i]));
     }
     return result;
   }
