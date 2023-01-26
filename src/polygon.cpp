@@ -169,3 +169,13 @@ polygon_p polygon_set_hole(polygon_p geometries, cpp11::integers which, polygon_
   polygon *result(new polygon(poly));
   return {result};
 }
+
+[[cpp11::register]]
+polygon_p polygon_get_rings(polygon_p geometries) {
+  if (geometries.get() == nullptr) {
+    cpp11::stop("Data structure pointer cleared from memory");
+  }
+  std::vector<Polygon> poly = geometries->get_rings();
+  polygon *result(new polygon(poly));
+  return {result};
+}

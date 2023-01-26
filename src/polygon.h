@@ -239,6 +239,25 @@ public:
     }
     return res;
   }
+  std::vector<Polygon> get_rings() const {
+    std::vector<Polygon> res;
+    if (size() == 0) {
+      return res;
+    }
+    res.reserve(size());
+    for (int i = 0; i < size(); ++i) {
+      if (_storage[i].is_na()) {
+        continue;
+      }
+      if (!_storage[i].is_unbounded()) {
+        res.emplace_back(_storage[i].outer_boundary());
+      }
+      for (auto iter = _storage[i].holes_begin(); iter != _storage[i].holes_end(); iter++) {
+        res.emplace_back(*iter);
+      }
+    }
+    return res;
+  }
 
   // Predicates
   cpp11::writable::logicals is_valid() {

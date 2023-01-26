@@ -8,6 +8,8 @@
 \alias{boundary<-}
 \alias{hole}
 \alias{hole<-}
+\alias{n_rings}
+\alias{rings}
 \alias{connect_holes}
 \title{Polygon rings}
 \usage{
@@ -22,6 +24,10 @@ boundary(x) <- value
 hole(x, which)
 
 hole(x, which = NULL) <- value
+
+n_rings(x)
+
+rings(x)
 
 connect_holes(x)
 }
@@ -61,11 +67,11 @@ plot(boundary(poly), col = "grey")
 plot(hole(poly, 1), col = "grey")
 
 # Change the boundary
-boundary(poly) <- euclid::circle(point(5, 5), 40)
+boundary(poly) <- circle(point(5, 5), 40)
 plot(poly, col = "grey")
 
 # Add a hole
-hole(poly) <- euclid::circle(point(7, 7), 9)
+hole(poly) <- circle(point(7, 7), 9)
 plot(poly, col = "grey")
 
 # Change a hole (by using a combination of hole and def setters)

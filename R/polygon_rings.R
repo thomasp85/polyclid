@@ -35,11 +35,11 @@
 #' plot(hole(poly, 1), col = "grey")
 #'
 #' # Change the boundary
-#' boundary(poly) <- euclid::circle(point(5, 5), 40)
+#' boundary(poly) <- circle(point(5, 5), 40)
 #' plot(poly, col = "grey")
 #'
 #' # Add a hole
-#' hole(poly) <- euclid::circle(point(7, 7), 9)
+#' hole(poly) <- circle(point(7, 7), 9)
 #' plot(poly, col = "grey")
 #'
 #' # Change a hole (by using a combination of hole and def setters)
@@ -136,6 +136,19 @@ hole <- function(x, which) {
       new_poly_vector(polygon_set_hole(get_ptr(x), which, get_ptr(value)))
     }
   }
+}
+#' @rdname polygon_rings
+#' @export
+n_rings <- function(x) {
+  ifelse(is.na(x), 0L, !is_unbounded(x) + n_holes(x))
+}
+#' @rdname polygon_rings
+#' @export
+rings <- function(x) {
+  if (!is_polygon(x)) {
+    cli_abort("{.arg x} must be a polygon")
+  }
+  new_poly_vector(polygon_get_rings(get_ptr(x)))
 }
 
 #' @rdname polygon_rings
