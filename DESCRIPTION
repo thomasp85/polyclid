@@ -23,7 +23,8 @@ SystemRequirements:
     mpfr
 RoxygenNote: 7.2.1
 Depends: 
-    euclid
+    euclid,
+    R (>= 2.10)
 Imports: 
     cli,
     graphics,
@@ -42,3 +43,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+LazyData: true
