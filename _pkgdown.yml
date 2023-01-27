@@ -119,6 +119,7 @@ reference:
     selection of new measures.
   contents:
   - approx_vert_angle
+  - approx_vert_normal
 - title: Data
   desc: >
     It is often good to have some complex polygons to try out stuff with so
