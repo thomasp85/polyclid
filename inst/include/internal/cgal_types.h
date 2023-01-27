@@ -123,19 +123,27 @@ public:
     }
   }
   void remove_with_flag(int flag) {
-    for (auto iter = edges_begin(); iter != edges_end(); iter++) {
-      if (iter->data() == flag) remove_edge(iter, false, false);
+    for (auto iter = edges_begin(); iter != edges_end(); ) {
+      auto current = iter;
+      iter = std::next(iter, 1);
+      if (current->data() == flag) remove_edge(current, false, false);
     }
-    for (auto iter = vertices_begin(); iter != vertices_end(); iter++) {
-      if (iter->is_isolated() && iter->data() == flag) remove_isolated_vertex(iter);
+    for (auto iter = vertices_begin(); iter != vertices_end(); ) {
+      auto current = iter;
+      iter = std::next(iter, 1);
+      if (current->is_isolated() && current->data() == flag) remove_isolated_vertex(current);
     }
   }
   void remove_without_flag(int flag) {
-    for (auto iter = edges_begin(); iter != edges_end(); iter++) {
-      if (iter->data() != flag) remove_edge(iter, false, false);
+    for (auto iter = edges_begin(); iter != edges_end(); ) {
+      auto current = iter;
+      iter = std::next(iter, 1);
+      if (current->data() != flag) remove_edge(current, false, false);
     }
-    for (auto iter = vertices_begin(); iter != vertices_end(); iter++) {
-      if (iter->is_isolated() && iter->data() != flag) remove_isolated_vertex(iter);
+    for (auto iter = vertices_begin(); iter != vertices_end(); ) {
+      auto current = iter;
+      iter = std::next(iter, 1);
+      if (current->is_isolated() && current->data() != flag) remove_isolated_vertex(current);
     }
   }
 };
