@@ -13,13 +13,28 @@
     <loc>https://polyclid.r-euclid.com/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://polyclid.r-euclid.com/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://polyclid.r-euclid.com/articles/polyclid.html</loc>
+  </url>
+  <url>
     <loc>https://polyclid.r-euclid.com/authors.html</loc>
   </url>
   <url>
     <loc>https://polyclid.r-euclid.com/index.html</loc>
   </url>
   <url>
+    <loc>https://polyclid.r-euclid.com/reference/approx_vert_angle.html</loc>
+  </url>
+  <url>
+    <loc>https://polyclid.r-euclid.com/reference/approx_vert_normal.html</loc>
+  </url>
+  <url>
     <loc>https://polyclid.r-euclid.com/reference/connect_polylines.html</loc>
+  </url>
+  <url>
+    <loc>https://polyclid.r-euclid.com/reference/denmark.html</loc>
   </url>
   <url>
     <loc>https://polyclid.r-euclid.com/reference/index.html</loc>
@@ -29,6 +44,9 @@
   </url>
   <url>
     <loc>https://polyclid.r-euclid.com/reference/is_valid.html</loc>
+  </url>
+  <url>
+    <loc>https://polyclid.r-euclid.com/reference/partition.html</loc>
   </url>
   <url>
     <loc>https://polyclid.r-euclid.com/reference/poly_bool.html</loc>
@@ -56,5 +74,8 @@
   </url>
   <url>
     <loc>https://polyclid.r-euclid.com/reference/reverse_orientation.html</loc>
+  </url>
+  <url>
+    <loc>https://polyclid.r-euclid.com/reference/vert_insert.html</loc>
   </url>
 </urlset>
