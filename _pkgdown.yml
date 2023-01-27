@@ -87,10 +87,17 @@ reference:
     for all boolean operations between polygons and polylines.
   contents:
   - poly_bool
+- title: Polygon partitioning
+  desc: >
+    Partitioning polygons into convex parts or triangles are important for many
+    algorithms as solutions to concave polygons can often be found by solving
+    the problem for its subparts (e.g. finding the controid of a polygon).
+  contents:
+  - partition_convex
 - title: Predicates
   desc: >
     polyclid provides a set of predicates about it's types to inspect various
-    properties of them
+    properties of them.
   contents:
   - is_valid
   - is_simple
@@ -99,8 +106,22 @@ reference:
 - title: Manipulation and extraction
   desc: >
     Apart from the basic `vert()`, and `edge()` polyclid provides a set of
-    functions for extracting and manipulating the geometries it supports
+    functions for extracting and manipulating the geometries it supports.
   contents:
   - boundary
   - reverse_orientation
   - connect_polylines
+  - vert_insert
+- title: Measures
+  desc: >
+    Polyclid provides methods for a range of euclids measures, such as
+    `approx_area()`, `approx_length()`, `centroid()` etc, but also provides a
+    selection of new measures.
+  contents:
+  - approx_vert_angle
+- title: Data
+  desc: >
+    It is often good to have some complex polygons to try out stuff with so
+    polyclid comes with a high resolution encoding of Denmark.
+  contents:
+  - denmark
