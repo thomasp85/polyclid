@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   polyclid: polyclid.html
-last_built: 2023-01-27T12:36Z
+last_built: 2023-01-27T12:47Z
 urls:
   reference: https://polyclid.r-euclid.com/reference
   article: https://polyclid.r-euclid.com/articles
