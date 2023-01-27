@@ -19,8 +19,6 @@
 #' @param x A `polyclid_polyline_set` vector
 #' @param simplify Should the extracted polylines be simplified by joining lines
 #' where possible
-#' @param ignore_inner Should inner faces (i.e. faces not adjacent to the
-#' unbounded face) be ignored
 #' @param ... Arguments passed on
 #'
 #' @return a `polyclid_polygon_set` vector

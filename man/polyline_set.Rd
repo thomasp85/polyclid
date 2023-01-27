@@ -25,9 +25,6 @@ case the union of the polygons in each vector is used for the set.}
 
 \item{simplify}{Should the extracted polylines be simplified by joining lines
 where possible}
-
-\item{ignore_inner}{Should inner faces (i.e. faces not adjacent to the
-unbounded face) be ignored}
 }
 \value{
 a \code{polyclid_polygon_set} vector
